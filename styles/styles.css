@@ -1,0 +1,813 @@
+
+
+/* Botón de acción */
+header button {
+    background-color: #1f4068;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Contenedor de encabezado */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+}
+
+/* Contenedor del logo y título */
+.logo-title-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s;
+}
+
+
+
+/* Estilos para la imagen del logo */
+.logo {
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.3rem;
+    max-width: 12.5rem;
+    margin: 0 1.5rem 0 2rem;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+    transition: box-shadow 0.4s, transform 0.4s;
+    overflow: hidden;
+}
+
+.logo:hover {
+    box-shadow: 0 7px 20px rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+}
+
+.logo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: inherit;
+    transition: background-color 0.4s;
+}
+
+.logo:hover::after {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+    transition: opacity 0.4s;
+}
+
+.logo:hover img {
+    opacity: 1;
+}
+
+
+/* Enlaces de navegación */
+nav a {
+    color: #ccc;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem;
+    margin: 0 1.5rem;
+    position: relative;
+    transition: color 0.4s, transform 0.4s, letter-spacing 0.3s;
+    letter-spacing: 0.5px;
+}
+
+nav a:hover {
+    color: #ffd700;
+    transform: translateY(-3px) scale(1.05);
+    letter-spacing: 1px;
+}
+
+nav a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ffd700;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    transition: width 0.4s, transform 0.4s;
+}
+
+nav a:hover::after {
+    width: 100%;
+    transform: scaleX(1.1);
+}
+
+nav a:active {
+    transform: scale(0.93);
+    color: #ffb700;
+}
+
+/* Título del sitio */
+.site-title {
+    margin: 0;
+    font-size: 4rem;
+    font-weight: 800;
+    color: hsl(115, 74%, 24%);
+    text-shadow: 2px 2px 8px rgba(250, 250, 248, 0.8);
+    transition: transform 0.3s, text-shadow 0.4s, color 0.3s;
+}
+
+.site-title:hover {
+    color: #0e0d00;
+    transform: scale(1.02);
+    text-shadow: 3px 3px 10px rgba(250, 250, 248, 1);
+}
+
+/* Lista de navegación */
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.nav-list li {
+    transition: transform 0.3s;
+}
+
+.nav-list li:hover {
+    transform: translateY(-2px);
+}
+
+/* Enlaces de la lista de navegación */
+.nav-list a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-list a:hover {
+    color: #000;
+    background-color: #ffd700;
+}
+/* Botones avanzados */
+.button, .login-button, .register-button {
+    background-color: rgba(253, 253, 252, 0.8);
+    color: #000;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    outline: none;
+}
+
+.button:hover, .login-button:hover, .register-button:hover {
+    background-color: #057a00;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0, 128, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.button:active, .login-button:active, .register-button:active {
+    transform: scale(0.98);
+}
+
+.button:focus, .login-button:focus, .register-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+/* Estilos para formularios todos los textos tienen este color en comun salvo que algo diga lo contrario */ 
+form label {
+    display: block;
+    margin: 0.75rem 0 0.4rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+form input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus {
+    border-color: #268f30;
+    box-shadow: 0 0 5px rgba(38, 153, 48, 0.3);
+}
+
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #269930;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+form button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+form button:active {
+    background-color: #d8ca4e;
+    transform: scale(0.98);
+}
+
+/* Estilos avanzados para pop-ups */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    animation: fadeBackground 0.4s ease;
+}
+
+.popup .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.popup-content {
+    color: #2b2b2b;
+    background-color: rgba(253, 253, 251, 0.9);
+    padding: 1.5rem;
+    margin: 10% auto;
+    width: 80%;
+    max-width: 24rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(255, 255, 255, 0.2);
+    animation: slideIn 0.4s ease-out;
+    transform: scale(0.9);
+}
+
+.popup-content:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 12px rgba(255, 255, 255, 0.3);
+}
+
+.close {
+    color: #999;
+    float: right;
+    font-size: 1.75rem;
+    font-weight: bold;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.close:hover, .close:focus {
+    color: #1a1a1a;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+/* Estilos de calificación */
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 0.2rem;
+    justify-content: flex-end;
+}
+
+/* Estilos globales */
+body {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+    color: #faf9f9;
+    background-color: #f4f5f5;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Contenedor principal */
+#main-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+#reviews, #chat {
+    grid-column: span 1;
+}
+
+/* Sección #home */
+#home {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(4, 122, 0, 0.8), rgba(34, 139, 34, 0.7));
+    padding: 0.25rem 2rem;
+    border-radius: 1rem;
+    margin: 2rem auto;
+    max-width: 94rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 1.2rem; /* Aumenta este valor según sea necesario */
+
+}
+
+#home:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Contenedor del mapa ajustado */
+
+#map {
+    width: calc(145% - 1rem); /* Deja solo 0.5rem de margen a cada lado */
+    max-width: 1500px; /* Aumenta el ancho máximo */
+    height: 40rem;
+    margin: 0.5rem auto; /* Margen superior e inferior de 0.5rem */
+    border: 0.15rem solid rgba(163, 232, 181, 0.8);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.4s, box-shadow 0.4s;
+    margin-left: -7rem;
+}
+
+#map:hover::before {
+    opacity: 1;
+}
+
+
+/* Sección de chat */
+#chat {
+    flex: 1;
+    margin: 1rem;
+    min-width: 20rem;
+}
+
+/* Título del chat */
+#chat-title {
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    text-align: left;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor del chat */
+#chat-container {
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 25rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #046b00, #0a8c36);
+    border-radius: 1rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    margin: 1.5rem auto;
+    margin-bottom: 1rem;
+
+}
+
+/* Lista de usuarios */
+#user-list {
+    overflow-y: auto;
+    max-width: 10rem;
+    padding: 1.5rem;
+    background-color: #1a7425;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #f0ecec;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Usuarios en línea */
+#online-users-container {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border: 1px solid rgba(248, 247, 247, 0.5);
+    border-radius: 0.5rem;
+    background-color: rgba(239, 245, 240, 0.6);
+}
+
+#online-users {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#online-users li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+#online-users img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#online-users span {
+    font-weight: bold;
+    color: #030303;
+}
+
+#online-users-count {
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #333;
+}
+
+/* Indicador de escritura */
+.typing-indicator {
+    font-style: italic;
+    color: #888;
+    margin-top: 0.75rem;
+}
+
+/* Mensajes */
+.message-wrapper {
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: rgba(233, 233, 233, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.username {
+    font-weight: bold;
+    color: #004085;
+    margin-bottom: 0.3rem;
+}
+
+.bot-message {
+    color: #007bff;
+    background-color: rgba(247, 237, 96, 0.8);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #ff0000;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Contenedor de mensajes */
+#messages {
+    overflow-y: auto;
+    flex: 1;
+    padding: 0.75rem;
+    background: rgba(3, 94, 0, 0.35);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: 47vh;
+    width: 95%;
+    margin: 0.75rem auto;
+    border: 1px solid rgba(252, 251, 251, 0.9);
+}
+
+/* Área de entrada de mensajes */
+#message-input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 0.5rem;
+    margin: 0.5rem auto;
+    width: calc(100% - 2rem);
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Botón de envío */
+#send-button {
+    padding: 0.6rem 1rem;
+    background-color: #0282bd;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+/* Estilos globales para el pie de página */
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(135deg, #b38c0e2d, #8066002d);
+    text-align: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 2%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#footer:hover {
+    background-color: #a6801f;
+    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor de contacto */
+#contact-container {
+    margin-right: 0;
+}
+
+/* Iconos de redes sociales */
+.social-logo {
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: transform 0.9s;
+    margin: 0 0.625rem;
+}
+
+.social-logo:hover {
+    transform: scale(2.1);
+}
+/* Contenedor de sugerencias */
+#sugerencias-container {
+    position: absolute;
+    width: 15%;
+    background: rgb(4, 122, 0);
+    border: 1px solid #e0e0e0;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+/* Elemento de sugerencia */
+.sugerencia-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sugerencia-item:hover {
+    background: rgba(6, 192, 0, 0.5);
+    color: #f7f3f3;
+    font-weight: bold;
+}
+
+/* Campo de búsqueda */
+#buscar {
+    width: 70%;
+    background: linear-gradient(135deg, rgba(4, 122, 0, 0.8), rgba(34, 139, 34, 0.7));
+    color: #020202;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.3s, border-color 0.3s;
+    right: -8.5rem;
+    position: relative;
+}
+
+#buscar:focus {
+    background-color: rgba(0, 123, 255, 0.1);
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Botón de búsqueda */
+#buscar-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#buscar-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#buscar-btn:active {
+    background-color: #003f7f;
+    transform: scale(0.98);
+}
+/* Contenedor de reseñas */
+#reviews {
+    max-width: 400px;
+    margin: 2px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(4, 122, 0, 0.8), rgba(34, 139, 34, 0.7));
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.98);
+    font-family: Arial, sans-serif;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+/* Títulos de la sección de reseñas */
+#reviews h2, #reviews h3 {
+    font-size: 1.8em;
+    color: #030303;
+    margin-bottom: 15px;
+}
+
+/* Cada reseña */
+
+/* Separador entre reseñas */
+
+/* Puntuación con estrellas */
+
+/* Formulario de reseñas */
+#form-agregar-resena {
+    margin-top: 0;
+}
+
+#form-agregar-resena label {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0;
+    display: inline-block;
+}
+
+#form-agregar-resena input[type="text"],
+#form-agregar-resena input[type="number"],
+#form-agregar-resena textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.98);
+}
+
+#form-agregar-resena button[type="submit"] {
+    width: 100%;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#form-agregar-resena button[type="submit"]:hover {
+    background: #0056b3;
+}
+
+/* Estrellas de calificación */
+.rating-container {
+    display: inline-block;
+    direction: ltr;
+}
+
+.estrella {
+    font-size: 2.0rem;
+    color: #eeff00;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.estrella:hover,
+.estrella:hover ~ .estrella {
+    color: #f4c542;
+}
+
+.estrella.seleccionada,
+.estrella.seleccionada ~ .estrella {
+    color: #f4c542;
+}
+
+.estrella:hover {
+    transform: scale(1.2);
+}
+
+/* Promedio de estrellas */
+/* Botón de cierre de sesión */
+.logout-button {
+    background-color: #df3543;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logout-button:hover {
+    background-color: #ca2525;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button:active {
+    background-color: #bd1f1f;
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Formulario para añadir empresa */
+#add-company-form {
+    margin-top: 20px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 500px;
+    
+}
+
+/* Mensaje de la empresa */
+#company-message {
+    font-size: 1em;
+    color: green;
+}
+details summary {
+    color: #007BFF; /* Color del texto del resumen */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+details[open] summary {
+    color: #0056b3; /* Color del texto del resumen cuando está abierto */
+}
+
+details p {
+    color: #080808; /* Color del texto del contenido */
+}

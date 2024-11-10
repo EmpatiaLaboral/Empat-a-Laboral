@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empatía Laboral</title>
+
+    <!-- CSS de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- CSS de Leaflet.AwesomeMarkers -->
+    <link rel="stylesheet" href="styles/leaflet.awesome-markers.css">
+    <!-- CSS de Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/mobile.css" media="only screen and (max-width: 768px)">
+
+    
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-title-container">
+                <img src="logo.png" alt="Logo de la Empresa" class="logo">
+                <h1 class="site-title">EMPATIA LABORAL</h1>
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#map">Map</a></li>
+                    <li><a href="#services">Disponible</a></li>
+                    <li><a href="#chat">Chat</a></li>
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="open-popup-button login-button" aria-label="Iniciar sesión"
+                        onclick="openPopup('login')">Iniciar Sesión</button>
+                    <div id="success-message" aria-live="polite" style="display: none; color: green;">¡Operación
+                        realizada con éxito!</div>
+                    <button type="button" class="open-popup-button register-button" aria-label="Registrarse"
+                        onclick="openPopup('register')">Registrarse</button>
+                    <button type="button" class="logout-button" aria-label="Cerrar sesión" onclick="logout()">Cerrar
+                        Sesión</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="home">
+        <h1></h1>
+        <p>Bienvenido a Empatía Laboral , un espacio para compartir y descubrir experiencias laborales.
+             Aquí, puedes explorar y dejar reseñas sobre empresas, destacando aquellas que practican un trato justo hacia sus empleados .
+             Nuestra misión es promover la transparencia y premiar a los trabajadores que valoran a sus trabajadores, ayudando a crear un entorno laboral más justo para todos.</p>
+        
+    </div>
+
+    <div id="main-container">
+
+        <section id="reviews">
+        </section>
+
+        <section id="map">
+            <h2>Map De empresas</h2>
+
+
+
+
+        </section>
+
+       <!-- Menu de selección de sector -->
+    <div id="sectorMenu" style="display:none;">
+        <h3>Filtros de Búsqueda</h3>
+        <label for="sectorSelect">Selecciona el sector:</label>
+        <select id="sectorSelect" multiple>
+            <option value="Tecnología">Tecnología</option>
+            <option value="Tienda">Tienda</option>
+            <option value="Educación">Educación</option>
+            <option value="Salud">Salud</option>
+            <option value="Construcción">Construcción</option>
+            <option value="Finanzas">Finanzas</option>
+            <option value="Deportes">Deportes</option>
+            <option value="Turismo">Turismo</option>
+            <option value="Otros">Otros</option>
+        </select>
+        <br>
+        <label for="valoracionMin">Valoración Mínima:</label>
+        <input type="number" id="valoracionMin" min="1" max="5" placeholder="1 - 5">
+        <br>
+        <button id="aplicarFiltros">Aplicar Filtros</button>
+        <button id="restablecerFiltros">Restablecer Filtros</button>
+        <button id="seleccionarTodosSectores">Seleccionar Todos los Sectores</button>
+    </div>
+    <script src="scripts/filtros.js" defer></script>
+
+        
+
+        <section id="buscar">
+            <h2>Buscador</h2>
+            <div id="buscar-direccion-container" style="margin-bottom: 15px;">
+                <input type="text" id="buscar-direccion" placeholder="Buscar dirección..."
+                    style="width: 70%; padding: 10px; font-size: 1em;">
+                <button id="buscar-btn" style="padding: 10px; font-size: 1em;">Buscar</button>
+            </div>
+            <section id="add-company-form">
+                <h2>Añadir Empresa</h2>
+                <form id="company-form">
+                    <label>Nombre de la Empresa:</label>
+                    <input type="text" id="company-name" required placeholder="Introduce el nombre de la empresa">
+
+                    <label>Sector Laboral:</label>
+                    <select id="sectorSelectAddCompany" required>
+                        <option value="" disabled selected>Selecciona un sector</option>
+                        <option value="Tecnología">Tecnología</option>
+                        <option value="Tienda">Tienda</option>
+                        <option value="Educación">Educación</option>
+                        <option value="Salud">Salud</option>
+                        <option value="Construcción">Construcción</option>
+                        <option value="Finanzas">Finanzas</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Turismo">Turismo</option>
+                        <option value="Otros">Otros</option>
+                        <!-- Puedes añadir más opciones aquí -->
+                    </select>
+
+
+                    <label>Dirección:</label>
+                    <input type="text" id="company-address" placeholder="Opcional si proporciona latitud y longitud">
+
+                    <label>Latitud:</label>
+                    <input type="number" id="company-lat" step="any" placeholder="Ej. 37.7749">
+
+                    <label>Longitud:</label>
+                    <input type="number" id="company-lng" step="any" placeholder="Ej. -122.4194">
+
+                    <button type="submit">Añadir Empresa</button>
+                </form>
+
+                <!-- Div para mensajes de éxito o error -->
+                <div id="company-message" style="display:none; color: green; margin-top: 10px;"></div>
+            </section>
+        </section>
+
+        <section id="services">
+
+        </section>
+
+
+        <section id="chat">
+            <h2 id="chat-title">Chat en Vivo</h2>
+            <div id="chat-container">
+                <div id="chat-box">
+                    <div id="messages">
+                        <!-- Mensajes del chat -->
+                    </div>
+                    <input type="text" id="message-input" placeholder="Escribe tu mensaje..."
+                        aria-label="Entrada de mensaje para el chat">
+                    <button id="send-button" aria-label="Enviar mensaje del chat">Enviar</button>
+                </div>
+                <div id="online-users-container">
+                    <h3>Usuarios Conectados:</h3>
+                    <ul id="online-users"></ul>
+                    <p id="online-users-count">Usuarios conectados: 0</p>
+                </div>
+            </div>
+            <script src="scripts/chat.js" type="module"></script>
+
+        </section>
+
+
+    </div>
+
+    <footer id="footer">
+        <p>Esta página web está en constante desarrollo y mejora.
+            Si tienes alguna sugerencia para ayudarnos a crecer y mejorar,
+            no dudes en enviarnos un correo a empatialaboralayuda@gmail.com. ¡Nos encantaría escuchar tus ideas y comentarios!</p>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contacto</h3>
+                <p>Email: empatialaboralayuda@gmail.com</p>
+                <p>Teléfono: +123 456 7890</p>
+            </div>
+            <div class="share-container">
+                <p>Compartir en redes sociales</p>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-url.com&quote=¡Descubre esta web que ayuda a encontrar las mejores empresas con opiniones de como es el trabajar en ellas!" target="_blank">
+                    <img src="images/facebook-icon.png" alt="Facebook" class="social-logo">
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://tu-url.com&text=¡Descubre%20esta%20web%20para%20opiniones%20justas%20sobre%20empresas!" target="_blank">
+                    <img src="images/twitter-icon.png" alt="Twitter" class="social-logo">
+                </a>
+                <!-- Para Instagram: Instrucciones para redirigir al usuario con el contenido -->
+                <a href="https://www.instagram.com" target="_blank" onclick="alert('Comparte tu experiencia en Instagram subiendo una historia con esta imagen y el enlace https://tu-url.com')">
+                    <img src="images/instagram-icon.png" alt="Instagram" class="social-logo">
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tu-url.com&summary=Una%20web%20que%20ayuda%20a%20trabajadores%20y%20empresas%20a%20conectar%20mejor." target="_blank">
+                    <img src="images/linkedin-icon.png" alt="LinkedIn" class="social-logo">
+                </a>
+                <a href="https://wa.me/?text=¡Echa%20un%20vistazo%20a%20esta%20web%20que%20ayuda%20a%20trabajadores%20a%20conocer%20mejor%20sus%20opciones!%20https://tu-url.com" target="_blank">
+                    <img src="images/whatsapp-icon.png" alt="WhatsApp" class="social-logo">
+                </a>
+            </div>
+            
+        </div>
+    </footer>
+
+    <!-- Popups de autenticación y login -->
+    <div id="auth-popup" class="popup" aria-hidden="true">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()" tabindex="0" aria-label="Cerrar popup">&times;</span>
+            <h2 id="popup-title"></h2>
+            <form id="popup-form" aria-live="assertive">
+                <div id="password-suggestions" style="color: red; margin-top: 5px;"></div>
+                <div>
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Recordarme</label>
+                </div>
+                <input type="text" id="login-email" autocomplete="email">
+                <input type="password" id="login-password" autocomplete="current-password">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Elemento loader -->
+    <div id="loader" style="display: none;" aria-live="polite">Cargando...</div>
+    <div id="success-message" style="display: none;" aria-live="polite">¡Éxito!</div>
+
+    <!-- Scripts de Leaflet y AwesomeMarkers -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" defer></script>
+    <script src="scripts/leaflet.awesome-markers.js" defer></script> <!-- Asegurarse de que esta ruta es correcta -->
+
+    <!-- Scripts personalizados -->
+    <script src="scripts/reseñas.js" defer></script>
+    <script src="scripts/map.js" defer></script>
+    <script src="scripts/addCompany.js" defer></script>
+
+    <script src="scripts/buscador.js" defer></script>
+    <script src="scripts/authFunctions.js" type="module"></script>
+    <script src="scripts/validation.js" type="module"></script>
+    <script src="scripts/passwordUtils.js" type="module"></script>
+    <script src="scripts/infoButton.js" defer></script>
+    <script src="//code.tidio.co/jjwaksgq9v6pk1z22mycnx4gw878efvy.js" async></script>
+    <script src="scripts/footer.js" defer></script>
+    <script>
+        function openPopup(type) {
+            const popup = document.getElementById('auth-popup');
+            const title = document.getElementById('popup-title');
+            const form = document.getElementById('popup-form');
+            popup.style.display = 'block';
+            popup.setAttribute('aria-hidden', 'false');
+            title.textContent = type === 'login' ? 'Iniciar Sesión' : 'Registrarse';
+            form.focus();
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('auth-popup');
+            popup.style.display = 'none';
+            popup.setAttribute('aria-hidden', 'true');
+        }
+    </script>
+
+    <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background-color: #333; color: #fff; padding: 15px; text-align: center; display: none;">
+        Usamos cookies para mejorar tu experiencia en nuestra web. <a href="/politica-de-cookies" style="color: #4CAF50;">Más información</a>
+        <button onclick="aceptarCookies()" style="margin-left: 10px; padding: 5px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Aceptar</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById('cookie-banner').style.display = 'block';
+            }
+        };
+    
+        function aceptarCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+    </script>
+    
+    
+</body>
+
+</html>
