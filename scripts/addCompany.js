@@ -1,3 +1,5 @@
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     const empresaForm = document.getElementById("company-form");
     const empresaMessage = document.getElementById("company-message");
@@ -131,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Firestore db:", db); // Verifica si `db` está correctamente definido
 
-    function añadirEmpresa(nombre, sector, direccion, lat, lng) {
+    async function añadirEmpresa(nombre, sector, direccion, lat, lng) {
         const nuevaEmpresa = {
             nombre: nombre,
             sector: sector,
@@ -142,26 +144,21 @@ document.addEventListener("DOMContentLoaded", function () {
             reseñas: []
         };
 
-        console.log("Firestore db:", db); // Verifica si `db` está correctamente definido
-
-        db.collection("empresas").add(nuevaEmpresa)
-            .then(() => {
-                console.log("Empresa añadida a Firestore:", nuevaEmpresa);
-                empresaMessage.textContent = "Empresa añadida exitosamente!";
-                empresaMessage.style.color = "green";
-                empresaMessage.style.display = "block";
-                empresaForm.reset();
-            })
-            .catch((error) => {
-                console.error("Error al añadir la empresa en Firestore:", error);
-                empresaMessage.textContent = "Error al añadir la empresa.";
-                empresaMessage.style.color = "red";
-                empresaMessage.style.display = "block";
-            })
-            .finally(() => {
-                setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
-            });
+        try {
+            const empresasRef = collection(db, "empresas");
+            await addDoc(empresasRef, nuevaEmpresa);
+            console.log("Empresa añadida a Firestore:", nuevaEmpresa);
+            empresaMessage.textContent = "Empresa añadida exitosamente!";
+            empresaMessage.style.color = "green";
+            empresaMessage.style.display = "block";
+            empresaForm.reset();
+        } catch (error) {
+            console.error("Error al añadir la empresa en Firestore:", error);
+            empresaMessage.textContent = "Error al añadir la empresa.";
+            empresaMessage.style.color = "red";
+            empresaMessage.style.display = "block";
+        } finally {
+            setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
+        }
     }
-    
-    
 });
