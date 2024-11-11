@@ -140,11 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
             reseñas: []
         };
     
-        // Guardar la empresa en Firebase Firestore
         db.collection("empresas").add(nuevaEmpresa)
             .then(() => {
                 console.log("Empresa añadida a Firestore:", nuevaEmpresa);
-    
                 empresaMessage.textContent = "Empresa añadida exitosamente!";
                 empresaMessage.style.color = "green";
                 empresaMessage.style.display = "block";
@@ -160,5 +158,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
             });
     }
+    
     
 });
