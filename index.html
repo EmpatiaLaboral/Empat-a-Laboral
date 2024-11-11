@@ -226,6 +226,32 @@
     <div id="loader" style="display: none;" aria-live="polite">Cargando...</div>
     <div id="success-message" style="display: none;" aria-live="polite">¡Éxito!</div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOGqbWfkbBeHcu-jjZYNggKNXq8QMRFBI",
+            authDomain: "empatia-laboral-b6595.firebaseapp.com",
+            projectId: "empatia-laboral-b6595",
+            storageBucket: "empatia-laboral-b6595.appspot.com",
+            messagingSenderId: "632150523448",
+            appId: "1:632150523448:web:ac54fcffe193c3e00030cd",
+            measurementId: "G-VGE7VZRXE9"
+        };
+
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);  // Conectar a Firestore
+        const auth = getAuth(app);     // Conectar a Auth
+
+        // Hacer que `db` y `auth` sean accesibles globalmente para los otros scripts
+        window.db = db;
+        window.auth = auth;
+    </script>
+
     <!-- Scripts de Leaflet y AwesomeMarkers -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" defer></script>
     <script src="scripts/leaflet.awesome-markers.js" defer></script> <!-- Asegurarse de que esta ruta es correcta -->
@@ -279,31 +305,7 @@
         }
     </script>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDOGqbWfkbBeHcu-jjZYNggKNXq8QMRFBI",
-            authDomain: "empatia-laboral-b6595.firebaseapp.com",
-            projectId: "empatia-laboral-b6595",
-            storageBucket: "empatia-laboral-b6595.appspot.com",
-            messagingSenderId: "632150523448",
-            appId: "1:632150523448:web:ac54fcffe193c3e00030cd",
-            measurementId: "G-VGE7VZRXE9"
-        };
-
-
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);  // Conectar a Firestore
-        const auth = getAuth(app);     // Conectar a Auth
-
-        // Hacer que `db` y `auth` sean accesibles globalmente para los otros scripts
-        window.db = db;
-        window.auth = auth;
-    </script>
 
 
     

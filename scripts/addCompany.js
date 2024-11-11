@@ -129,6 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
+    console.log("Firestore db:", db); // Verifica si `db` está correctamente definido
+
     function añadirEmpresa(nombre, sector, direccion, lat, lng) {
         const nuevaEmpresa = {
             nombre: nombre,
@@ -139,7 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
             creador: auth.currentUser ? auth.currentUser.uid : "invitado",
             reseñas: []
         };
-    
+
+        console.log("Firestore db:", db); // Verifica si `db` está correctamente definido
+
         db.collection("empresas").add(nuevaEmpresa)
             .then(() => {
                 console.log("Empresa añadida a Firestore:", nuevaEmpresa);
