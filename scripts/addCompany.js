@@ -1,4 +1,3 @@
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const empresaForm = document.getElementById("company-form");

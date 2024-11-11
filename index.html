@@ -228,7 +228,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
         const firebaseConfig = {
@@ -241,15 +241,16 @@
             measurementId: "G-VGE7VZRXE9"
         };
 
-
         // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);  // Conectar a Firestore
         const auth = getAuth(app);     // Conectar a Auth
 
-        // Hacer que `db` y `auth` sean accesibles globalmente para los otros scripts
+        // Hacer que `db`, `auth`, `collection` y `addDoc` sean accesibles globalmente para los otros scripts
         window.db = db;
         window.auth = auth;
+        window.collection = collection;
+        window.addDoc = addDoc;
     </script>
 
     <!-- Scripts de Leaflet y AwesomeMarkers -->
