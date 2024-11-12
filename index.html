@@ -228,9 +228,9 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
+    
         const firebaseConfig = {
             apiKey: "AIzaSyDOGqbWfkbBeHcu-jjZYNggKNXq8QMRFBI",
             authDomain: "empatia-laboral-b6595.firebaseapp.com",
@@ -240,24 +240,18 @@
             appId: "1:632150523448:web:ac54fcffe193c3e00030cd",
             measurementId: "G-VGE7VZRXE9"
         };
-
-        // Inicializar Firebase
+    
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);  // Conectar a Firestore
-        const auth = getAuth(app);     // Conectar a Auth
-
-        // Hacer que `db`, `auth`, `collection` y `addDoc` sean accesibles globalmente para los otros scripts
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+    
         window.db = db;
         window.auth = auth;
         window.collection = collection;
         window.addDoc = addDoc;
-    </script>
-
-    <script type="module">
-        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-        window.collection = collection;
         window.getDocs = getDocs;
     </script>
+    
 
     <!-- Scripts de Leaflet y AwesomeMarkers -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" defer></script>
