@@ -1,18 +1,29 @@
-import { onSnapshot, collection, query, orderBy, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { addDoc, collection, onSnapshot, serverTimestamp, query, orderBy, limit, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
 
 function loadMessages(chatManager) {
-    const q = query(collection(db, "chatMessages"), orderBy("timestamp"));
+    const maxMessages = 100;  // Límite de mensajes que se mantendrán en el chat
+    const q = query(collection(db, "chatMessages"), orderBy("timestamp"), limit(maxMessages));
     onSnapshot(q, (snapshot) => {
         chatManager.messagesContainer.innerHTML = ""; // Limpiar mensajes previos
         snapshot.forEach((doc) => {
             const data = doc.data();
-            chatManager.sendMessage(data.username, data.message);
+            chatManager.displayMessage(data.username, data.message);
         });
+
+        // Eliminar mensajes antiguos si se supera el límite
+        if (snapshot.size >= maxMessages) {
+            snapshot.docs.slice(0, snapshot.size - maxMessages).forEach((doc) => {
+                deleteDoc(doc.ref);
+            });
+        }
     });
 }
 
 
-// Archivo de lógica de negocio para el chat
+
+
 class ChatManager {
     constructor(messagesContainer) {
         this.messagesContainer = messagesContainer;
@@ -20,8 +31,6 @@ class ChatManager {
 
     async sendMessage(username, message, isBot = false) {
         message = sanitizeInput(message);
-
-        // Guardar mensaje en Firestore
         await addDoc(collection(db, "chatMessages"), {
             username: username,
             message: message,
@@ -30,10 +39,19 @@ class ChatManager {
         });
     }
 
+    displayMessage(username, message, isBot = false) {
+        const messageWrapper = document.createElement('div');
+        messageWrapper.classList.add('message-wrapper');
+        messageWrapper.innerHTML = `<strong>${username}:</strong> ${message}`;
+        this.messagesContainer.appendChild(messageWrapper);
+        this.scrollToBottom();
+    }
 
     scrollToBottom() {
         this.messagesContainer.scrollTo({ top: this.messagesContainer.scrollHeight, behavior: 'smooth' });
     }
+
+
 
     showBotTyping() {
         const typingElement = document.createElement('div');
@@ -54,27 +72,15 @@ function sanitizeInput(input) {
 
 function handleSendButtonClick(chatManager) {
     const messageInput = document.getElementById('message-input');
-    const sendButton = document.getElementById('send-button');
-    const errorContainer = document.getElementById('error-container');
     const message = messageInput.value.trim();
-    const maxMessageLength = 200;
-    const username = localStorage.getItem('usuarioActual') || 'Anónimo';
+    const username = auth.currentUser && auth.currentUser.displayName ? auth.currentUser.displayName : "Invitado";
 
-    if (message.length > maxMessageLength) {
-        errorContainer.textContent = 'El mensaje es demasiado largo. Máximo 200 caracteres.';
-        errorContainer.style.display = 'block';
-        setTimeout(() => { errorContainer.style.display = 'none'; }, 3000);
-        return;
-    }
-
-    errorContainer.style.display = 'none';
-    if (message !== '' && message.replace(/\s/g, '').length > 0) {
+    if (message) {
         chatManager.sendMessage(username, message);
-        sendButton.disabled = true;
-        botResponse(chatManager);
         messageInput.value = '';
     }
 }
+
 
 function showUserTyping(username) {
     const typingIndicator = document.getElementById('user-typing-indicator');
@@ -172,12 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sendButton && messageInput) {
         messageInput.addEventListener('input', () => {
             sendButton.disabled = messageInput.value.trim().length === 0;
+            const typingUser = auth.currentUser ? (auth.currentUser.displayName || "Invitado") : "Invitado";
             if (messageInput.value.trim().length > 0) {
-                showUserTyping(localStorage.getItem('usuarioActual') || 'Anónimo');
+                showUserTyping(typingUser);
             } else {
                 hideUserTyping();
             }
         });
+        
+        
         sendButton.disabled = true;
 
         sendButton.addEventListener('click', () => handleSendButtonClick(chatManager));
@@ -191,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     displayOnlineUsers();
 
-    const currentUser = localStorage.getItem('usuarioActual');
+    const currentUser = auth.currentUser ? (auth.currentUser.displayName || "Invitado") : "Invitado";
     if (currentUser) {
         const userAvatar = localStorage.getItem('userAvatar') || 'images/avatar_default.png';
         addOnlineUser({ name: currentUser, avatar: userAvatar });
