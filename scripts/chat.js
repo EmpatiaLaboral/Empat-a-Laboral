@@ -1,31 +1,35 @@
+import { onSnapshot, collection, query, orderBy, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+function loadMessages(chatManager) {
+    const q = query(collection(db, "chatMessages"), orderBy("timestamp"));
+    onSnapshot(q, (snapshot) => {
+        chatManager.messagesContainer.innerHTML = ""; // Limpiar mensajes previos
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            chatManager.sendMessage(data.username, data.message);
+        });
+    });
+}
+
+
 // Archivo de lógica de negocio para el chat
 class ChatManager {
     constructor(messagesContainer) {
         this.messagesContainer = messagesContainer;
     }
 
-    sendMessage(username, message, isBot = false) {
+    async sendMessage(username, message, isBot = false) {
         message = sanitizeInput(message);
-        const messageWrapper = document.createElement('div');
-        messageWrapper.classList.add('message-wrapper');
 
-        const usernameElement = document.createElement('div');
-        usernameElement.textContent = `${username}:`;
-        usernameElement.classList.add('username');
-
-        const messageElement = document.createElement('div');
-        messageElement.textContent = message;
-        messageElement.classList.add('message');
-        if (isBot) {
-            messageElement.classList.add('bot-message');
-        }
-
-        messageWrapper.appendChild(usernameElement);
-        messageWrapper.appendChild(messageElement);
-        this.messagesContainer.appendChild(messageWrapper);
-
-        this.scrollToBottom();
+        // Guardar mensaje en Firestore
+        await addDoc(collection(db, "chatMessages"), {
+            username: username,
+            message: message,
+            isBot: isBot,
+            timestamp: serverTimestamp()
+        });
     }
+
 
     scrollToBottom() {
         this.messagesContainer.scrollTo({ top: this.messagesContainer.scrollHeight, behavior: 'smooth' });
@@ -192,4 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const userAvatar = localStorage.getItem('userAvatar') || 'images/avatar_default.png';
         addOnlineUser({ name: currentUser, avatar: userAvatar });
     }
+
+    loadMessages(chatManager);
 });
