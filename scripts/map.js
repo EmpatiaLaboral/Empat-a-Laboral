@@ -1,4 +1,11 @@
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+// Elimina estas líneas
+// import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+// Usa window.collection y window.getDocs
+const myCollection = window.collection(db, 'myCollection');
+window.getDocs(myCollection).then((snapshot) => {
+  // tu código aquí
+});
 
 // Definir los colores de cada sector usando AwesomeMarkers
 const coloresPorSector = {

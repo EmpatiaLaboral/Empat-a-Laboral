@@ -253,6 +253,12 @@
         window.addDoc = addDoc;
     </script>
 
+    <script type="module">
+        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+        window.collection = collection;
+        window.getDocs = getDocs;
+    </script>
+
     <!-- Scripts de Leaflet y AwesomeMarkers -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" defer></script>
     <script src="scripts/leaflet.awesome-markers.js" defer></script> <!-- Asegurarse de que esta ruta es correcta -->
