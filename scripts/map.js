@@ -1,3 +1,5 @@
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
 // Definir los colores de cada sector usando AwesomeMarkers
 const coloresPorSector = {
   "Tecnología": "blue",
@@ -61,8 +63,26 @@ document.addEventListener("DOMContentLoaded", function () {
   L.control.layers(baseLayers).addTo(map);
 
   // Almacenar empresas temporalmente en el cliente
-  window.empresas = JSON.parse(localStorage.getItem('empresas')) || [];
+  window.empresas = [];  // Inicializamos el array de empresas vacío
 
+  // Función para cargar empresas desde Firestore y añadirlas al mapa
+  function cargarEmpresasDesdeFirestore() {
+      const empresasRef = collection(db, "empresas");
+  
+      getDocs(empresasRef).then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              const empresa = doc.data();
+              empresa.id = doc.id;  // Guardamos el ID del documento Firestore
+              empresas.push(empresa);
+              crearMarcadorEmpresa(empresa);  // Añadir la empresa al mapa
+          });
+      }).catch((error) => {
+          console.error("Error al cargar empresas desde Firestore:", error);
+      });
+  }
+  
+  cargarEmpresasDesdeFirestore();  // Llamar a la función para cargar empresas
+  
   // Función para buscar una empresa específica en Overpass API
   function buscarEmpresa(nombreEmpresa) {
     const query = `
