@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!usuarioActual) {
         empresaMessage.textContent = "Debes iniciar sesión para añadir una empresa.";
         empresaMessage.style.color = "red";
-        empresaMessage.style.fontWeight = "bold"; // Aumenta el grosor de la fuente
-        empresaMessage.style.textShadow = "1px 1px 2px black"; // Añade sombra al texto para mayor nitidez
         empresaMessage.style.display = "block";
         empresaForm.style.display = "none"; // Oculta el formulario para usuarios no autenticados
         return;
@@ -121,10 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => {
                 console.error("Error en la geocodificación:", error);
-                empresaMessage.textContent = "Hubo un problema al procesar la solicitud. Por favor, intenta de nuevo más tarde.";
-                empresaMessage.style.color = "red";
-                empresaMessage.style.display = "block";
-                setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
                 callback(null);
             });
     }

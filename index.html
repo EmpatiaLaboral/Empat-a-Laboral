@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-    
 
 <head>
     <meta charset="UTF-8">
@@ -15,9 +14,92 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/mobile.css" media="only screen and (max-width: 768px)">
+    <style>
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
 
-    
+            .nav-list {
+                flex-direction: column;
+                margin: 0;
+                padding: 0;
+            }
+
+            .button-container {
+                margin-top: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #services,
+            #map,
+            #chat {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            #services-box,
+            #chat-container {
+                width: 90%;
+            }
+
+            #map {
+                height: 30rem;
+                width: 90%;
+            }
+
+            #reseñas-container {
+                width: 90%;
+                margin: 10px auto;
+            }
+
+            #user-list,
+            #chat-box {
+                width: 100%;
+            }
+
+            .social-logo {
+                width: 30px;
+                height: 30px;
+                margin: 0.5rem;
+            }
+
+            .logo {
+                max-width: 80%;
+                height: auto;
+            }
+
+            .site-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +113,7 @@
                 <ul class="nav-list">
                     <li><a href="#home">Inicio</a></li>
                     <li><a href="#map">Map</a></li>
-                    <li><a href="#services">Disponible</a></li>
+                    <li><a href="#services">Consultas</a></li>
                     <li><a href="#chat">Chat</a></li>
                 </ul>
                 <div class="button-container">
@@ -49,11 +131,9 @@
     </header>
 
     <div id="home">
-        <h1></h1>
-        <p>Bienvenido a Empatía Laboral , un espacio para compartir y descubrir experiencias laborales.
-             Aquí, puedes explorar y dejar reseñas sobre empresas, destacando aquellas que practican un trato justo hacia sus empleados .
-             Nuestra misión es promover la transparencia y premiar a los trabajadores que valoran a sus trabajadores, ayudando a crear un entorno laboral más justo para todos.</p>
-        
+        <h1>Empatía Laboral</h1>
+        <p>Explora reseñas de empresas que se destacan por su trato justo a los empleados.</p>
+        <p>Encuentra información confiable y contribuye con tus propias experiencias.</p>
     </div>
 
     <div id="main-container">
@@ -174,33 +254,36 @@
     <footer id="footer">
         <p>Esta página web está en constante desarrollo y mejora.
             Si tienes alguna sugerencia para ayudarnos a crecer y mejorar,
-            no dudes en enviarnos un correo a empatialaboralayuda@gmail.com. ¡Nos encantaría escuchar tus ideas y comentarios!</p>
+            no dudes en enviarnos un correo a lalalalalal. ¡Nos encantaría escuchar tus ideas y comentarios!</p>
         <div class="contact-container">
             <div class="contact-info">
                 <h3>Contacto</h3>
-                <p>Email: empatialaboralayuda@gmail.com</p>
+                <p>Email: contacto@empresa.com</p>
                 <p>Teléfono: +123 456 7890</p>
             </div>
             <div class="share-container">
                 <p>Compartir en redes sociales</p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-url.com&quote=¡Descubre esta web que ayuda a encontrar las mejores empresas con opiniones de como es el trabajar en ellas!" target="_blank">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-url.com" target="_blank">
                     <img src="images/facebook-icon.png" alt="Facebook" class="social-logo">
                 </a>
-                <a href="https://twitter.com/intent/tweet?url=https://tu-url.com&text=¡Descubre%20esta%20web%20para%20opiniones%20justas%20sobre%20empresas!" target="_blank">
+                <a href="https://twitter.com/intent/tweet?url=https://tu-url.com&text=¡Echa un vistazo a esta web!"
+                    target="_blank">
                     <img src="images/twitter-icon.png" alt="Twitter" class="social-logo">
                 </a>
-                <!-- Para Instagram: Instrucciones para redirigir al usuario con el contenido -->
-                <a href="https://www.instagram.com" target="_blank" onclick="alert('Comparte tu experiencia en Instagram subiendo una historia con esta imagen y el enlace https://tu-url.com')">
+                <a href="https://www.instagram.com" target="_blank">
                     <img src="images/instagram-icon.png" alt="Instagram" class="social-logo">
                 </a>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tu-url.com&summary=Una%20web%20que%20ayuda%20a%20trabajadores%20y%20empresas%20a%20conectar%20mejor." target="_blank">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tu-url.com" target="_blank">
                     <img src="images/linkedin-icon.png" alt="LinkedIn" class="social-logo">
                 </a>
-                <a href="https://wa.me/?text=¡Echa%20un%20vistazo%20a%20esta%20web%20que%20ayuda%20a%20trabajadores%20a%20conocer%20mejor%20sus%20opciones!%20https://tu-url.com" target="_blank">
+                <a href="https://wa.me/?text=¡Echa un vistazo a esta web! https://tu-url.com" target="_blank">
                     <img src="images/whatsapp-icon.png" alt="WhatsApp" class="social-logo">
                 </a>
+                <a href="https://www.youtube.com/channel/TU_CANAL" target="_blank">
+                    <img src="images/youtube-icon.png" alt="YouTube" class="social-logo">
+                </a>
+
             </div>
-            
         </div>
     </footer>
 
@@ -259,25 +342,6 @@
             popup.setAttribute('aria-hidden', 'true');
         }
     </script>
-
-    <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background-color: #333; color: #fff; padding: 15px; text-align: center; display: none;">
-        Usamos cookies para mejorar tu experiencia en nuestra web. <a href="/politica-de-cookies" style="color: #4CAF50;">Más información</a>
-        <button onclick="aceptarCookies()" style="margin-left: 10px; padding: 5px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Aceptar</button>
-    </div>
-
-    <script>
-        window.onload = function() {
-            if (!localStorage.getItem('cookiesAccepted')) {
-                document.getElementById('cookie-banner').style.display = 'block';
-            }
-        };
-    
-        function aceptarCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookie-banner').style.display = 'none';
-        }
-    </script>
-    
     
 </body>
 

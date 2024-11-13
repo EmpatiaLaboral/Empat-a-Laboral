@@ -44,11 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para dar o quitar like usando el índice de las reseñas filtradas
   window.toggleLike = function (index, lat, lng) {
-    if (!usuarioActual) {
-        alert("Debes iniciar sesión para dar o quitar like.");
-        return;
-    }
-
     const reseñasFiltradas = reseñas.filter((reseña) => reseña.lat === lat && reseña.lng === lng);
     const reseña = reseñasFiltradas[index];
     

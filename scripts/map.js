@@ -351,7 +351,8 @@ map.on('click', function (e) {
   
     // Estilos en línea para hacer que las estrellas se vean doradas
     const popupContent = `<b>${empresa.nombre}</b><br>
-                <strong>Promedio de Estrellas:</strong> <span style="color: gold; font-size: 1.2em;">${estrellas}</span>`;
+                          <strong>Promedio de Estrellas:</strong> <span style="color: gold; font-size: 1.2em;">${estrellas}</span><br>
+                          <button onclick='borrarEmpresa(${empresa.lat}, ${empresa.lng})'>Borrar Empresa</button>`;
   
     return popupContent;
   }
@@ -371,31 +372,43 @@ map.on('click', function (e) {
     });
   }
 
+  // Función para borrar una empresa
+  window.borrarEmpresa = function (lat, lng) {
+    const usuarioActual = localStorage.getItem('usuarioActual');
+    const empresaIndex = empresas.findIndex(emp => emp.lat === lat && emp.lng === lng);
 
+    if (empresaIndex !== -1) {
+      const empresa = empresas[empresaIndex];
 
-// Nivel de zoom mínimo requerido para mostrar las empresas
-const zoomMinimo = 10;
-
-// Escuchar el evento 'zoomend' en el mapa
-map.on('zoomend', function () {
-  const currentZoom = map.getZoom();
-
-  empresas.forEach(empresa => {
-    if (empresa.marker) {
-      if (currentZoom >= zoomMinimo) {
-        // Mostrar marcador si el nivel de zoom es suficiente
-        if (!map.hasLayer(empresa.marker)) {
-          empresa.marker.addTo(map);
-        }
-      } else {
-        // Ocultar marcador si el nivel de zoom es menor al mínimo
-        if (map.hasLayer(empresa.marker)) {
-          map.removeLayer(empresa.marker);
-        }
+      // Verificar si el usuario es el creador o el administrador
+      if (empresa.creador !== usuarioActual && usuarioActual !== 'admin') {
+        alert('No tienes permisos para borrar esta empresa.');
+        return;
       }
+
+      // Verificar si la empresa tiene reseñas asociadas
+      if (empresa.reseñas && empresa.reseñas.length > 0) {
+        alert('No se puede borrar la empresa porque tiene reseñas asociadas.');
+        return;
+      }
+
+      empresas.splice(empresaIndex, 1);
+      actualizarLocalStorage();
+      alert('Empresa borrada correctamente.');
+      map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker && layer.getLatLng().lat === lat && layer.getLatLng().lng === lng) {
+          map.removeLayer(layer);
+        }
+      });
+    } else {
+      alert('Empresa no encontrada.');
     }
-  });
-});
+  };
+
+
+
+
 
 
 });
+
