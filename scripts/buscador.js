@@ -7,19 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sugerenciasContainer.id = "sugerencias-container";
     inputBuscar.parentNode.appendChild(sugerenciasContainer);
 
-    let empresas = [];
-
-    // Función para cargar empresas desde Firestore
-    function cargarEmpresasDesdeFirestore() {
-        const empresasRef = collection(db, "empresas");
-        getDocs(empresasRef).then((querySnapshot) => {
-            empresas = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        }).catch(error => {
-            console.error("Error al cargar empresas desde Firestore:", error);
-        });
-    }
-
-    cargarEmpresasDesdeFirestore();  // Cargar empresas al inicio
+    let empresas = JSON.parse(localStorage.getItem('empresas')) || [];
 
     let debounceTimer;
     inputBuscar.addEventListener("input", function () {
@@ -27,13 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
         debounceTimer = setTimeout(() => {
             const direccion = inputBuscar.value;
             sugerenciasContainer.innerHTML = "";
-
+            
+            // Añadir sugerencias basadas en las chinchetas existentes en el mapa
             if (direccion.length > 2) {
-                let coincidenciasLocales = false;
-
                 empresas.forEach(empresa => {
                     if (empresa.nombre.toLowerCase().includes(direccion.toLowerCase())) {
-                        coincidenciasLocales = true;
                         const item = document.createElement("li");
                         item.classList.add("sugerencia-item");
                         item.textContent = empresa.nombre;
@@ -47,46 +33,47 @@ document.addEventListener("DOMContentLoaded", function () {
                         sugerenciasContainer.appendChild(item);
                     }
                 });
-
-                // Búsqueda en Nominatim si no hay coincidencias entre las empresas locales
-                if (!coincidenciasLocales) {
-                    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`;
-                    fetch(url)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error("Network response was not ok");
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            if (data && data.length > 0) {
-                                data.forEach(sugerencia => {
-                                    const item = document.createElement("li");
-                                    item.classList.add("sugerencia-item");
-                                    item.textContent = sugerencia.display_name;
-                                    item.addEventListener("click", function () {
-                                        sugerenciasContainer.innerHTML = "";
-                                        const latitud = parseFloat(sugerencia.lat);
-                                        const longitud = parseFloat(sugerencia.lon);
-                                        const eventoDireccionSeleccionada = new CustomEvent("direccionSeleccionada", {
-                                            detail: { lat: latitud, lng: longitud }
-                                        });
-                                        document.dispatchEvent(eventoDireccionSeleccionada);
+            }
+    
+            // Búsqueda en Nominatim si no hay coincidencias entre las empresas locales
+            if (direccion.length > 2) {
+                const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`;
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            data.forEach(sugerencia => {
+                                const item = document.createElement("li");
+                                item.classList.add("sugerencia-item");
+                                item.textContent = sugerencia.display_name;
+                                item.addEventListener("click", function () {
+                                    sugerenciasContainer.innerHTML = "";
+                                    const latitud = parseFloat(sugerencia.lat);
+                                    const longitud = parseFloat(sugerencia.lon);
+                                    const eventoDireccionSeleccionada = new CustomEvent("direccionSeleccionada", {
+                                        detail: { lat: latitud, lng: longitud }
                                     });
-                                    sugerenciasContainer.appendChild(item);
+                                    document.dispatchEvent(eventoDireccionSeleccionada);
                                 });
-                            } else {
-                                mostrarMensajeNoResultados();
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error al buscar sugerencias:", error);
-                            alert("Hubo un problema al buscar las sugerencias. Verifica tu conexión a Internet e inténtalo de nuevo.");
-                        });
-                }
+                                sugerenciasContainer.appendChild(item);
+                            });
+                        } else {
+                            mostrarMensajeNoResultados();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error al buscar sugerencias:", error);
+                        alert("Hubo un problema al buscar las sugerencias. Verifica tu conexión a Internet e inténtalo de nuevo.");
+                    });
             }
         }, 300);
     });
+    
 
     buscarBtn.addEventListener("click", function () {
         const direccion = inputBuscar.value;

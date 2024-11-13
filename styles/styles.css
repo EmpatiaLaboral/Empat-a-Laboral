@@ -593,7 +593,7 @@ body::before {
 /* Contenedor de sugerencias */
 #sugerencias-container {
     position: absolute;
-    width: 100%;
+    width: 15%;
     background: rgb(4, 122, 0);
     border: 1px solid #e0e0e0;
     z-index: 1000;

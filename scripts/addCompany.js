@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const empresaForm = document.getElementById("company-form");
     const empresaMessage = document.getElementById("company-message");
@@ -130,34 +129,28 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    console.log("Firestore db:", db); // Verifica si `db` está correctamente definido
-
-    async function añadirEmpresa(nombre, sector, direccion, lat, lng) {
+    // Función para enviar la empresa al mapa
+    function añadirEmpresa(nombre, sector, direccion, lat, lng) {
         const nuevaEmpresa = {
             nombre: nombre,
             sector: sector,
             direccion: direccion,
             lat: lat,
             lng: lng,
-            creador: auth.currentUser ? auth.currentUser.uid : "invitado",
+            creador: usuarioActual || "invitado",
             reseñas: []
         };
+        console.log("Nueva empresa creada:", nuevaEmpresa);
 
-        try {
-            const empresasRef = collection(db, "empresas");
-            await addDoc(empresasRef, nuevaEmpresa);
-            console.log("Empresa añadida a Firestore:", nuevaEmpresa);
-            empresaMessage.textContent = "Empresa añadida exitosamente!";
-            empresaMessage.style.color = "green";
-            empresaMessage.style.display = "block";
-            empresaForm.reset();
-        } catch (error) {
-            console.error("Error al añadir la empresa en Firestore:", error);
-            empresaMessage.textContent = "Error al añadir la empresa.";
-            empresaMessage.style.color = "red";
-            empresaMessage.style.display = "block";
-        } finally {
-            setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
-        }
+        const eventoNuevaEmpresa = new CustomEvent("nuevaEmpresa", { detail: nuevaEmpresa });
+        document.dispatchEvent(eventoNuevaEmpresa);
+        console.log("Evento 'nuevaEmpresa' disparado");
+
+        empresaMessage.textContent = "Empresa añadida exitosamente!";
+        empresaMessage.style.color = "green";
+        empresaMessage.style.display = "block";
+        empresaForm.reset();
+
+        setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
     }
 });

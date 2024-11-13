@@ -1,12 +1,3 @@
-// Elimina estas líneas
-// import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-
-// Usa window.collection y window.getDocs
-const myCollection = window.collection(db, 'myCollection');
-window.getDocs(myCollection).then((snapshot) => {
-  // tu código aquí
-});
-
 // Definir los colores de cada sector usando AwesomeMarkers
 const coloresPorSector = {
   "Tecnología": "blue",
@@ -70,48 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
   L.control.layers(baseLayers).addTo(map);
 
   // Almacenar empresas temporalmente en el cliente
-  window.empresas = [];  // Inicializamos el array de empresas vacío
+  window.empresas = JSON.parse(localStorage.getItem('empresas')) || [];
 
-  // Función para crear un marcador y añadirlo al mapa
-function crearMarcadorEmpresa(empresa) {
-  const colorChincheta = coloresPorSector[empresa.sector] || "gray";
-  const iconoChincheta = L.AwesomeMarkers.icon({
-      icon: 'briefcase',
-      markerColor: colorChincheta,
-      prefix: 'fa'
-  });
-
-  const marker = L.marker([empresa.lat, empresa.lng], { title: empresa.nombre, icon: iconoChincheta })
-      .addTo(map)
-      .bindPopup(getPopupContent(empresa))
-      .bindTooltip(empresa.nombre, { direction: "top", opacity: 0.8 });
-
-  addMarkerEventHandlers(marker, empresa);
-  empresa.marker = marker;  // Asignar el marcador a la empresa para referencia
-}
-
-// Función para cargar empresas desde Firestore y añadirlas al mapa
-function cargarEmpresasDesdeFirestore() {
-  const empresasRef = collection(db, "empresas");
-
-  getDocs(empresasRef).then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          const empresa = doc.data();
-          empresa.id = doc.id;  // Guardamos el ID del documento Firestore
-          empresas.push(empresa);
-          crearMarcadorEmpresa(empresa);  // Añadir la empresa al mapa
-      });
-  }).catch((error) => {
-      console.error("Error al cargar empresas desde Firestore:", error);
-  });
-}
-
-// Llamar a la función para cargar empresas
-cargarEmpresasDesdeFirestore();
-
-  
-  cargarEmpresasDesdeFirestore();  // Llamar a la función para cargar empresas
-  
   // Función para buscar una empresa específica en Overpass API
   function buscarEmpresa(nombreEmpresa) {
     const query = `
