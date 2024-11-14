@@ -70,23 +70,26 @@ function handleRegister(event) {
         return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users')) || {};
-    if (users[email]) {
-        displayError('El correo electrónico ya está registrado.');
-        return;
-    }
-
-    // Si hay una sesión iniciada, cerrarla
-    logout(true);
-
-    users[email] = { password, username };
-    localStorage.setItem('users', JSON.stringify(users));
-    alert('Registro exitoso. Ahora puedes iniciar sesión.');
-    closePopup();
-    updateUserStatus(username, true);
-    updateUIAfterAuth(username, true);
-    location.reload();
+    // Registrar usuario en Firebase Authentication
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Guardar nombre de usuario en Firestore
+            const user = userCredential.user;
+            return db.collection('users').doc(user.uid).set({ username: username });
+        })
+        .then(() => {
+            alert('Registro exitoso. Ahora puedes iniciar sesión.');
+            closePopup();
+            updateUserStatus(username, true);
+            updateUIAfterAuth(username, true);
+            location.reload();
+        })
+        .catch((error) => {
+            console.error("Error en el registro:", error);
+            displayError('Error en el registro. Intenta con otro correo electrónico.');
+        });
 }
+
 
 function handleLogin(event) {
     event.preventDefault();
@@ -98,33 +101,50 @@ function handleLogin(event) {
         return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users')) || {};
-    if (users[email] && users[email].password === password) {
-        // Si hay una sesión iniciada, cerrarla
-        logout(true);
-        
-        alert('Inicio de sesión exitoso.');
-        localStorage.setItem('usuarioActual', users[email].username); // Almacenar el nombre del usuario en localStorage
-        closePopup();
-        updateUserStatus(users[email].username, true);
-        updateUIAfterAuth(users[email].username, true);
-        location.reload();
-    } else {
-        displayError('Correo electrónico o contraseña incorrectos.');
-    }
+    // Iniciar sesión con Firebase Authentication
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            // Obtener el nombre de usuario desde Firestore
+            return db.collection('users').doc(user.uid).get();
+        })
+        .then((doc) => {
+            if (doc.exists) {
+                const username = doc.data().username;
+                localStorage.setItem('usuarioActual', username);
+                alert('Inicio de sesión exitoso.');
+                closePopup();
+                updateUserStatus(username, true);
+                updateUIAfterAuth(username, true);
+                location.reload();
+            } else {
+                displayError('No se pudo obtener el nombre de usuario.');
+            }
+        })
+        .catch((error) => {
+            console.error("Error en el inicio de sesión:", error);
+            displayError('Correo electrónico o contraseña incorrectos.');
+        });
 }
 
+
 export function logout(isSwitchingUser = false) {
-    // Eliminar la información del usuario del almacenamiento local
-    localStorage.removeItem('usuarioActual');
-    updateUserStatus(null, false);
-    updateUIAfterAuth(null, false);
-    location.reload();
-    // Redirigir solo si no estamos cambiando de usuario
-    if (!isSwitchingUser) {
-        window.location.href = '#home';
-    }
+    // Cerrar sesión con Firebase Authentication
+    firebase.auth().signOut()
+        .then(() => {
+            localStorage.removeItem('usuarioActual');
+            updateUserStatus(null, false);
+            updateUIAfterAuth(null, false);
+            location.reload();
+            if (!isSwitchingUser) {
+                window.location.href = '#home';
+            }
+        })
+        .catch((error) => {
+            console.error("Error al cerrar sesión:", error);
+        });
 }
+
 
 function updateUserStatus(username, isLoggedIn) {
     const userStatusStr = localStorage.getItem('userStatus');
@@ -217,8 +237,9 @@ function closePopupOnClickOutside(event) {
 
 // Verificar si el usuario está autenticado antes de agregar empresas
 export function isUserLoggedIn() {
-    return !!localStorage.getItem('usuarioActual');
+    return firebase.auth().currentUser !== null;
 }
+
 
 export function addCompany() {
     if (!isUserLoggedIn()) {

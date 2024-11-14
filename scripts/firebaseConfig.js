@@ -12,3 +12,4 @@ const firebaseConfig = {
 // Inicializar Firebase y hacer `db` global sin `export`
 const app = firebase.initializeApp(firebaseConfig);
 window.db = firebase.firestore(app);
+
