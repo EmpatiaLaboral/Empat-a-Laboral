@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const empresaForm = document.getElementById("company-form");
     const empresaMessage = document.getElementById("company-message");
@@ -123,28 +124,42 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // Función para enviar la empresa al mapa
-    function añadirEmpresa(nombre, sector, direccion, lat, lng) {
-        const nuevaEmpresa = {
-            nombre: nombre,
-            sector: sector,
-            direccion: direccion,
-            lat: lat,
-            lng: lng,
-            creador: usuarioActual || "invitado",
-            reseñas: []
-        };
-        console.log("Nueva empresa creada:", nuevaEmpresa);
+    // Función para enviar la empresa al mapa y guardarla en Firestore
+function añadirEmpresa(nombre, sector, direccion, lat, lng) {
+    const nuevaEmpresa = {
+        nombre: nombre,
+        sector: sector,
+        direccion: direccion,
+        lat: lat,
+        lng: lng,
+        creador: usuarioActual || "invitado",
+        reseñas: []
+    };
+    console.log("Nueva empresa creada:", nuevaEmpresa);
 
-        const eventoNuevaEmpresa = new CustomEvent("nuevaEmpresa", { detail: nuevaEmpresa });
-        document.dispatchEvent(eventoNuevaEmpresa);
-        console.log("Evento 'nuevaEmpresa' disparado");
+    // Guardar en Firestore
+    db.collection("empresas").add(nuevaEmpresa)
+        .then((docRef) => {
+            console.log("Empresa añadida a Firebase con ID:", docRef.id);
+            empresaMessage.textContent = "Empresa añadida exitosamente!";
+            empresaMessage.style.color = "green";
+            empresaMessage.style.display = "block";
+            empresaForm.reset();
 
-        empresaMessage.textContent = "Empresa añadida exitosamente!";
-        empresaMessage.style.color = "green";
-        empresaMessage.style.display = "block";
-        empresaForm.reset();
+            setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
 
-        setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
-    }
+            // Disparar evento para agregar la empresa en el mapa local
+            const eventoNuevaEmpresa = new CustomEvent("nuevaEmpresa", { detail: nuevaEmpresa });
+            document.dispatchEvent(eventoNuevaEmpresa);
+            console.log("Evento 'nuevaEmpresa' disparado");
+        })
+        .catch((error) => {
+            console.error("Error al añadir la empresa en Firebase: ", error);
+            empresaMessage.textContent = "Error al añadir la empresa en el servidor.";
+            empresaMessage.style.color = "red";
+            empresaMessage.style.display = "block";
+            setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
+        });
+}
+
 });
