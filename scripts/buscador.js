@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             const eventoDireccionSeleccionada = new CustomEvent("direccionSeleccionada", {
                                 detail: { lat: empresa.lat, lng: empresa.lng }
                             });
+                            console.log("Evento direccionSeleccionada disparado con coordenadas:", empresa.lat, empresa.lng);
                             document.dispatchEvent(eventoDireccionSeleccionada);
                         });
                         sugerenciasContainer.appendChild(item);
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                     const eventoDireccionSeleccionada = new CustomEvent("direccionSeleccionada", {
                                         detail: { lat: latitud, lng: longitud }
                                     });
+                                    console.log("Evento direccionSeleccionada disparado con coordenadas:", latitud, longitud);
                                     document.dispatchEvent(eventoDireccionSeleccionada);
                                 });
                                 sugerenciasContainer.appendChild(item);
@@ -100,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             detail: { lat: latitud, lng: longitud }
                         });
                         document.dispatchEvent(eventoDireccionSeleccionada);
-                        console.log("Evento direccionSeleccionada disparado");
+                        console.log("Evento direccionSeleccionada disparado con coordenadas:", latitud, longitud);
                         clearSearchField(); // Limpiar el campo de búsqueda después de la acción
                     } else {
                         alert("No se encontraron resultados para la dirección proporcionada.");
@@ -217,4 +219,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return costs[cadena2.length];
     }
+
+    // Añadir un listener para el evento "direccionSeleccionada"
+    document.addEventListener("direccionSeleccionada", function (event) {
+        console.log("Evento direccionSeleccionada recibido con coordenadas:", event.detail.lat, event.detail.lng);
+        // Aquí deberías añadir el código para mover el mapa a las coordenadas recibidas
+    });
 });
