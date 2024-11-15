@@ -41,6 +41,21 @@ class ChatManager {
     }
 }
 
+// Referencia a la colección "chatroom"
+const chatRoomRef = db.collection('chatroom');
+
+// Escuchar mensajes en tiempo real
+chatRoomRef.orderBy('timestamp', 'asc').onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+            const { username, message } = change.doc.data();
+            const chatManager = new ChatManager(document.getElementById('messages'));
+            chatManager.sendMessage(username, message); // Añade el mensaje a la UI
+        }
+    });
+});
+
+
 // Archivo de UI para el chat
 function sanitizeInput(input) {
     const element = document.createElement('div');
@@ -48,29 +63,32 @@ function sanitizeInput(input) {
     return element.innerHTML;
 }
 
-function handleSendButtonClick(chatManager) {
+function handleSendButtonClick() {
     const messageInput = document.getElementById('message-input');
-    const sendButton = document.getElementById('send-button');
-    const errorContainer = document.getElementById('error-container');
     const message = messageInput.value.trim();
-    const maxMessageLength = 200;
-    const username = localStorage.getItem('usuarioActual') || 'Anónimo';
-
-    if (message.length > maxMessageLength) {
-        errorContainer.textContent = 'El mensaje es demasiado largo. Máximo 200 caracteres.';
-        errorContainer.style.display = 'block';
-        setTimeout(() => { errorContainer.style.display = 'none'; }, 3000);
+    if (message === "") {
+        alert("No puedes enviar un mensaje vacío.");
         return;
     }
 
-    errorContainer.style.display = 'none';
-    if (message !== '' && message.replace(/\s/g, '').length > 0) {
-        chatManager.sendMessage(username, message);
-        sendButton.disabled = true;
-        botResponse(chatManager);
-        messageInput.value = '';
-    }
+    const username = localStorage.getItem("usuarioActual") || "Anónimo";
+    const chatManager = new ChatManager(document.getElementById('messages'));
+    chatManager.sendMessage(username, message); // Agregar mensaje a la UI local
+
+    // Guardar el mensaje en Firestore
+    db.collection('chatroom').add({
+        username: username,
+        message: message,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        console.log("Mensaje guardado en Firestore.");
+    }).catch((error) => {
+        console.error("Error al guardar el mensaje en Firestore:", error);
+    });
+
+    messageInput.value = ""; // Limpiar el campo de entrada
 }
+
 
 function showUserTyping(username) {
     const typingIndicator = document.getElementById('user-typing-indicator');
@@ -165,6 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const chatManager = new ChatManager(messagesContainer);
 
+    
+
     if (sendButton && messageInput) {
         messageInput.addEventListener('input', () => {
             sendButton.disabled = messageInput.value.trim().length === 0;
@@ -187,9 +207,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     displayOnlineUsers();
 
+    const username = localStorage.getItem("usuarioActual") || "Anónimo"; // Define un valor predeterminado
+
+
     const currentUser = localStorage.getItem('usuarioActual');
     if (currentUser) {
         const userAvatar = localStorage.getItem('userAvatar') || 'images/avatar_default.png';
         addOnlineUser({ name: currentUser, avatar: userAvatar });
     }
+    
+    db.collection('onlineUsers').doc(username).set({ online: true });
+    db.collection('onlineUsers').doc(username).delete();
+    db.collection('onlineUsers').onSnapshot((snapshot) => {
+        const onlineUsers = [];
+        snapshot.forEach((doc) => {
+            onlineUsers.push(doc.id);
+        });
+        displayOnlineUsers(onlineUsers); // Función para actualizar la lista de usuarios en línea en la UI
+    });
+    
+    let isListenerRegistered = false;
+
+   
+    
+
 });
