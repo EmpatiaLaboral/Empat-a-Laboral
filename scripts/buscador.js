@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
-    
+
             // Búsqueda en Nominatim si no hay coincidencias entre las empresas locales
             if (direccion.length > 2) {
                 const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`;
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return costs[cadena2.length];
     }
-    
+
 
     // Añadir un listener para el evento "direccionSeleccionada"
     document.addEventListener("direccionSeleccionada", function (event) {
@@ -227,3 +227,18 @@ document.addEventListener("DOMContentLoaded", function () {
         // Aquí deberías añadir el código para mover el mapa a las coordenadas recibidas
     });
 });
+if (!window.listenerDireccionSeleccionada) {
+    document.addEventListener("direccionSeleccionada", function (e) {
+        const { lat, lng } = e.detail;
+        console.log("Evento direccionSeleccionada recibido con coordenadas:", lat, lng);
+        if (window.map) {
+            window.map.setView([lat, lng], 17); // Centrar el mapa
+        } else {
+            console.error("El mapa no está definido.");
+        }
+    });
+
+    // Marcador para evitar duplicados
+    window.listenerDireccionSeleccionada = true;
+    console.log("Listener direccionSeleccionada añadido");
+}

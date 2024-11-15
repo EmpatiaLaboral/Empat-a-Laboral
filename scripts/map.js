@@ -32,15 +32,17 @@ function actualizarLocalStorage() {
 document.addEventListener("DOMContentLoaded", function () {
 
   // Inicializar el mapa
-  if (typeof L !== 'undefined' && document.getElementById('map')._leaflet_id != null) {
-    window.map = L.map(document.getElementById('map')._leaflet_id);
-  } else {
+  if (typeof L !== 'undefined' && document.getElementById('map')._leaflet_id) {
+    console.log("El mapa ya está inicializado.");
+    window.map = L.map(document.getElementById('map')._leaflet_id); // Reutilizar instancia existente
+} else {
     window.map = L.map('map', {
-      maxBounds: [[-85, -180], [85, 180]], // Limitar el área visible del mapa
-      maxBoundsViscosity: 1.0, // Restringir completamente la vista a los límites
-      minZoom: 2 // Limitar el nivel de zoom mínimo
+        maxBounds: [[-85, -180], [85, 180]], // Limitar el área visible del mapa
+        maxBoundsViscosity: 1.0, // Restringir completamente la vista a los límites
+        minZoom: 2 // Limitar el nivel de zoom mínimo
     }).setView([20, 0], 2);
-  }
+}
+
 
 
   // Añadir capas base: calle y satélite
@@ -181,8 +183,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.addEventListener("direccionSeleccionada", function (e) {
       const { lat, lng } = e.detail;
-      map.setView([lat, lng], 17); // Ajusta el zoom si es necesario
-    });
+      console.log("Evento direccionSeleccionada recibido en map.js con coordenadas:", lat, lng);
+      if (window.map) {
+          window.map.setView([lat, lng], 17); // Centrar el mapa
+      } else {
+          console.error("El mapa no está definido.");
+      }
+  });
+
+  
 
 
   });
@@ -412,3 +421,18 @@ map.on('click', function (e) {
 
 });
 
+if (!window.listenerDireccionSeleccionada) {
+  document.addEventListener("direccionSeleccionada", function (e) {
+      const { lat, lng } = e.detail;
+      console.log("Evento direccionSeleccionada recibido con coordenadas:", lat, lng);
+      if (window.map) {
+          window.map.setView([lat, lng], 17); // Centrar el mapa
+      } else {
+          console.error("El mapa no está definido.");
+      }
+  });
+
+  // Marcador para evitar duplicados
+  window.listenerDireccionSeleccionada = true;
+  console.log("Listener direccionSeleccionada añadido");
+}
