@@ -219,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return costs[cadena2.length];
     }
+    
 
     // Añadir un listener para el evento "direccionSeleccionada"
     document.addEventListener("direccionSeleccionada", function (event) {
