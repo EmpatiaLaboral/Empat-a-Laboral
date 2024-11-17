@@ -139,3 +139,53 @@
   color: #000000; /* Cambia este valor al color que desees */
   cursor: pointer;
 }
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #222;
+  color: #fff;
+  padding: 15px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+.cookie-banner p {
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.cookie-banner button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.btn-accept {
+  background: #28a745;
+  color: #fff;
+}
+
+.btn-reject {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-customize {
+  background: #ffc107;
+  color: #222;
+}
+
+.hidden {
+  display: none;
+}
