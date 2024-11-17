@@ -1,6 +1,47 @@
+// Asegurar que Firebase está inicializado
+if (!window.db) {
+  console.error("Firebase no está inicializado. Verifica tu archivo firebaseconfig.js.");
+}
+
+function mostrarNombreEmpresa(nombreEmpresa) {
+  const reviewsContainer = document.getElementById("reviews");
+  if (reviewsContainer) {
+      reviewsContainer.innerHTML = `<h2 id="nombre-empresa">${nombreEmpresa}</h2>`;
+  } else {
+      console.error("Contenedor de reseñas no encontrado.");
+  }
+}
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
-  const reseñasStr = localStorage.getItem("reseñas");
-  const reseñas = reseñasStr ? JSON.parse(reseñasStr) : [];
+  let reseñas = [];
+
+  if (window.db) {
+    // Código para guardar en Firebase
+} else {
+    console.warn("Firebase no disponible. Solo se utilizará localStorage.");
+}
+
+
+  if (window.db) {
+      db.collection("reseñas").get()
+        .then((snapshot) => {
+            reseñas = snapshot.docs.map((doc) => doc.data());
+            localStorage.setItem("reseñas", JSON.stringify(reseñas));
+            console.log("Reseñas cargadas desde Firebase.");
+        })
+        .catch((error) => {
+            console.error("Error al cargar reseñas de Firebase. Usando localStorage:", error);
+            const reseñasStr = localStorage.getItem("reseñas");
+            reseñas = reseñasStr ? JSON.parse(reseñasStr) : [];
+        });
+  } else {
+      console.warn("Firebase no disponible. Usando solo localStorage.");
+      const reseñasStr = localStorage.getItem("reseñas");
+      reseñas = reseñasStr ? JSON.parse(reseñasStr) : [];
+  }
+  
   const usuarioActual = localStorage.getItem("usuarioActual");
   const reviewsContainer = document.getElementById("reviews");
 
@@ -20,8 +61,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para mostrar las reseñas en la sección de reseñas
   const mostrarReseñas = (lat, lng) => {
-    const reseñasLista = document.getElementById("reseñas-lista");
+    let reseñasLista = document.getElementById("reseñas-lista");
+    if (!reseñasLista) {
+      reseñasLista = document.createElement("div");
+      reseñasLista.id = "reseñas-lista";
+      const reviewsContainer = document.getElementById("reviews");
+      if (reviewsContainer) {
+        reviewsContainer.appendChild(reseñasLista);
+      } else {
+        console.error("Contenedor principal de reseñas no encontrado.");
+        return;
+      }
+    }
     reseñasLista.innerHTML = ""; // Limpiar solo la lista de reseñas
+    
 
     const reseñasFiltradas = reseñas.filter((reseña) => reseña.lat === lat && reseña.lng === lng);
     const reseñasHTML = reseñasFiltradas.length
@@ -44,22 +97,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para dar o quitar like usando el índice de las reseñas filtradas
   window.toggleLike = function (index, lat, lng) {
+    if (!usuarioActual) {
+      alert("Debes iniciar sesión para dar o quitar likes.");
+      return;
+    }
+  
     const reseñasFiltradas = reseñas.filter((reseña) => reseña.lat === lat && reseña.lng === lng);
     const reseña = reseñasFiltradas[index];
     
     if (!reseña.likes) reseña.likes = []; // Inicializar likes si no existe
     const likeIndex = reseña.likes.indexOf(usuarioActual);
-
+  
     if (likeIndex === -1) {
         reseña.likes.push(usuarioActual); // Agregar like
     } else {
         reseña.likes.splice(likeIndex, 1); // Quitar like
     }
-
+  
+    // Actualizar las reseñas en Firebase
+    if (window.db) {
+        const reseñaId = `${reseña.lat}_${reseña.lng}_${index}`;
+        db.collection("reseñas").doc(reseñaId).set({
+            ...reseña,
+            likes: reseña.likes, // Guardar la lista actualizada de likes
+        })
+        .then(() => console.log("Likes actualizados en Firebase"))
+        .catch((error) => console.error("Error al actualizar likes en Firebase:", error));
+    } else {
+        console.warn("Firebase no disponible. Solo se actualiza en localStorage.");
+    }
+  
     // Actualizar las reseñas en localStorage y volver a renderizar
     localStorage.setItem("reseñas", JSON.stringify(reseñas));
     mostrarReseñas(lat, lng); // Actualizar la visualización de las reseñas
   };
+  
+
 
   // Resto de las funciones (mostrarPromedioEstrellas, mostrarFormularioAgregarReseña, etc.)
 
@@ -133,13 +206,24 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         reseñas.push(nuevaReseña);
         localStorage.setItem("reseñas", JSON.stringify(reseñas));
+        
+        // Guardar la reseña en Firebase
+        if (window.db) {
+            db.collection("reseñas").add(nuevaReseña)
+              .then(() => console.log("Reseña guardada en Firebase"))
+              .catch((error) => console.error("Error al guardar la reseña en Firebase:", error));
+        } else {
+            console.warn("Firebase no disponible. Solo se guardará en localStorage.");
+        }
+        
         reviewsContainer.innerHTML = "";
-        mostrarNombreEmpresa(nombreEmpresa);
+        mostrarNombreEmpresa(nombreEmpresa || "Nombre de la Empresa no disponible");
         mostrarPromedioEstrellas(lat, lng);
         mostrarFormularioAgregarReseña(lat, lng, nombreEmpresa);
         mostrarReseñas(lat, lng);
       }
     });
+    
   };
   
 });

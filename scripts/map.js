@@ -12,19 +12,82 @@ const coloresPorSector = {
 };
 
 
-// Función para actualizar localStorage sin referencias circulares
-function actualizarLocalStorage() {
-  // Guardar solo los datos esenciales de cada empresa
-  const empresasSimplificadas = empresas.map(({ nombre, sector, direccion, lat, lng, creador }) => ({
-    nombre,
-    sector,
-    direccion,
-    lat,
-    lng,
-    creador
-  }));
-  localStorage.setItem("empresas", JSON.stringify(empresasSimplificadas));
+
+
+
+
+
+
+
+
+
+
+function getPopupContent(empresa) {
+  if (!empresa || !empresa.nombre || !empresa.lat || !empresa.lng) {
+      console.error("Datos incompletos para generar el popup:", empresa);
+      return "<b>Error: Datos incompletos</b>";
+  }
+
+  const promedioEstrellas = typeof mostrarPromedioEstrellas === 'function'
+      ? mostrarPromedioEstrellas(empresa.lat, empresa.lng, true)
+      : 0;
+
+  const estrellas = Array(5).fill("☆")
+      .map((estrella, index) => index < Math.round(promedioEstrellas) ? "★" : estrella)
+      .join("");
+
+  const popupContent = `<b>${empresa.nombre}</b><br>
+                        <strong>Promedio de Estrellas:</strong> <span style="color: gold; font-size: 1.2em;">${estrellas}</span><br>`
+  return popupContent;
 }
+
+  // Función para agregar eventos a los marcadores
+  function addMarkerEventHandlers(marker, empresa) {
+    marker.on('click', function (e) {
+      const eventoEmpresaSeleccionada = new CustomEvent("empresaSeleccionada", {
+        detail: { lat: empresa.lat, lng: empresa.lng, nombreEmpresa: empresa.nombre }
+      });
+      document.dispatchEvent(eventoEmpresaSeleccionada);
+    });
+  }
+
+
+function crearMarcadorEmpresa(empresa) {
+  const colorChincheta = coloresPorSector[empresa.sector] || "gray";
+  const iconoChincheta = L.AwesomeMarkers.icon({
+      icon: 'briefcase',
+      markerColor: colorChincheta,
+      prefix: 'fa'
+  });
+
+  const marker = L.marker([empresa.lat, empresa.lng], { title: empresa.nombre, icon: iconoChincheta })
+      .addTo(map)
+      .bindPopup(getPopupContent(empresa))
+      .bindTooltip(empresa.nombre, { direction: "top", opacity: 0.8 });
+  addMarkerEventHandlers(marker, empresa);
+  empresa.marker = marker; // Asigna el marcador a la empresa
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const empresasRef = db.collection('empresas').limit(100);
+
+  empresasRef.onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+            const empresa = change.doc.data();
+            // Evitar duplicados comparando latitud y longitud
+            if (!empresas.some(e => e.lat === empresa.lat && e.lng === empresa.lng)) {
+                empresas.push(empresa);
+                crearMarcadorEmpresa(empresa);
+            }
+        }
+    });
+});
+
+      
+      });
+
+
 
 
 // Archivo: map.js
@@ -64,6 +127,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Almacenar empresas temporalmente en el cliente
   window.empresas = JSON.parse(localStorage.getItem('empresas')) || [];
+
+  function escucharEmpresasEnArea(latMin, latMax, lngMin, lngMax) {
+    const empresasRef = db.collection('empresas')
+        .where('lat', '>=', latMin)
+        .where('lat', '<=', latMax); // Filtro por latitud
+
+    empresasRef.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+                const empresa = change.doc.data();
+                
+                // Filtrar manualmente por longitud
+                if (
+                    empresa.lng >= lngMin &&
+                    empresa.lng <= lngMax &&
+                    !empresas.some(e => e.lat === empresa.lat && e.lng === empresa.lng)
+                ) {
+                    empresas.push(empresa);
+                    crearMarcadorEmpresa(empresa);
+                }
+            }
+        });
+    });
+}
+
+
+  function actualizarLocalStorage() {
+    // Guardar solo los datos esenciales de cada empresa
+    const empresasSimplificadas = empresas.map(({ nombre, sector, direccion, lat, lng, creador }) => ({
+        nombre: nombre || "Sin nombre",
+        sector: sector || "Otros",
+        direccion: direccion || "Sin dirección",
+        lat: lat,
+        lng: lng,
+        creador: creador || "invitado"
+    }));
+  
+    localStorage.setItem("empresas", JSON.stringify(empresasSimplificadas));
+  
+    // Guardar las empresas en Firestore
+    const batch = db.batch();
+    const empresasCollectionRef = db.collection('empresas'); // Referencia sin limit
+    const empresasRef = db.collection('empresas').limit(100); // Para leer empresas existentes
+    
+    empresasSimplificadas.forEach((empresa) => {
+        if (empresa.lat && empresa.lng) { // Asegurar que las coordenadas sean válidas
+            const docRef = empresasCollectionRef.doc(`${empresa.lat}_${empresa.lng}`); // Usar la referencia sin limit
+            batch.set(docRef, empresa);
+        } else {
+            console.warn("Empresa con datos incompletos omitida:", empresa);
+        }
+    });
+    
+  
+    batch.commit()
+        .then(() => console.log("Empresas sincronizadas con Firebase."))
+        .catch((error) => console.error("Error al sincronizar empresas con Firebase:", error));
+  }
+
+  
 
   // Función para buscar una empresa específica en Overpass API
   function buscarEmpresa(nombreEmpresa) {
@@ -119,6 +242,34 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  function guardarEmpresaSinDuplicados(empresa) {
+    const empresasRef = db.collection('empresas').limit(100);
+
+    empresasRef.where('direccion', '==', empresa.direccion).get()
+        .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+                // Si no hay duplicados, guarda la empresa
+                empresasRef.add(empresa)
+                    .then(() => console.log("Empresa guardada en Firebase."))
+                    .catch((error) => console.error("Error al guardar la empresa en Firebase:", error));
+            } else {
+                console.warn("Ya existe una empresa con la misma dirección en Firebase:", empresa.direccion);
+            }
+        })
+        .catch((error) => console.error("Error al verificar duplicados en Firebase:", error));
+}
+
+map.on('moveend', function () {
+  const bounds = map.getBounds();
+  const latMin = bounds.getSouth();
+  const latMax = bounds.getNorth();
+  const lngMin = bounds.getWest();
+  const lngMax = bounds.getEast();
+
+  escucharEmpresasEnArea(latMin, latMax, lngMin, lngMax);
+});
+
+
 
   
 
@@ -166,20 +317,8 @@ document.addEventListener("DOMContentLoaded", function () {
       crearMarcadorEmpresa(empresa);
     });
 
-    function crearMarcadorEmpresa(empresa) {
-      const colorChincheta = coloresPorSector[empresa.sector] || "gray";
-      const iconoChincheta = L.AwesomeMarkers.icon({
-        icon: 'briefcase',
-        markerColor: colorChincheta,
-        prefix: 'fa'
-      });
-      const marker = L.marker([empresa.lat, empresa.lng], { title: empresa.nombre, icon: iconoChincheta })
-        .addTo(map)
-        .bindPopup(getPopupContent(empresa))
-        .bindTooltip(empresa.nombre, { direction: "top", opacity: 0.8 });
-      addMarkerEventHandlers(marker, empresa);
-      empresa.marker = marker; // Asigna el marcador a la empresa
-    }
+
+  
 
     document.addEventListener("direccionSeleccionada", function (e) {
       const { lat, lng } = e.detail;
@@ -298,35 +437,43 @@ function mostrarPopupAgregarEmpresa(lat, lng) {
     });
 }
 
-// Función para añadir la empresa al mapa con el marcador correspondiente
 function agregarEmpresaMapa(nombre, sector, lat, lng) {
-    const usuarioActual = localStorage.getItem('usuarioActual') || 'invitado';
-    const nuevaEmpresa = {
-        nombre: nombre,
-        sector: sector,
-        lat: lat,
-        lng: lng,
-        creador: usuarioActual,
-        reseñas: []
-    };
+  const usuarioActual = localStorage.getItem('usuarioActual') || 'invitado';
+  const nuevaEmpresa = {
+      nombre: nombre,
+      sector: sector,
+      direccion: "Sin dirección", // Asignar un valor predeterminado si no hay dirección
+      lat: lat,
+      lng: lng,
+      creador: usuarioActual,
+      reseñas: []
+  };
 
-    const colorChincheta = coloresPorSector[sector] || "gray";
-    const iconoChincheta = L.AwesomeMarkers.icon({
-        icon: 'briefcase',
-        markerColor: colorChincheta,
-        prefix: 'fa'
-    });
+  nuevaEmpresa.direccion = nuevaEmpresa.direccion || "Dirección desconocida";
 
-    // Añadir la empresa al array y actualizar localStorage
-    empresas.push(nuevaEmpresa);
-    actualizarLocalStorage();
 
-    // Crear el marcador y añadirlo al mapa
-    const marker = L.marker([lat, lng], { title: nombre, icon: iconoChincheta }).addTo(map);
-    marker.bindPopup(getPopupContent(nuevaEmpresa)).openPopup();
-    marker.bindTooltip(nombre, { direction: 'top', opacity: 0.8 });
-    addMarkerEventHandlers(marker, nuevaEmpresa);
+  const colorChincheta = coloresPorSector[sector] || "gray";
+  const iconoChincheta = L.AwesomeMarkers.icon({
+      icon: 'briefcase',
+      markerColor: colorChincheta,
+      prefix: 'fa'
+  });
+
+  // Añadir la empresa al array y actualizar localStorage
+  empresas.push(nuevaEmpresa);
+  actualizarLocalStorage();
+
+  guardarEmpresaSinDuplicados(nuevaEmpresa);
+
+
+  // Crear el marcador y añadirlo al mapa
+  const marker = L.marker([lat, lng], { title: nombre, icon: iconoChincheta }).addTo(map);
+  marker.bindPopup(getPopupContent(nuevaEmpresa)).openPopup();
+  marker.bindTooltip(nombre, { direction: 'top', opacity: 0.8 });
+  addMarkerEventHandlers(marker, nuevaEmpresa);
 }
+
+
 
 // Evento para añadir empresa en el mapa cuando está en modo añadir
 map.on('click', function (e) {
@@ -344,75 +491,16 @@ map.on('click', function (e) {
 
 
 
-  function getPopupContent(empresa) {
-  
-    // Calcular el promedio de estrellas usando la función mostrarPromedioEstrellas
-    const promedioEstrellas = typeof mostrarPromedioEstrellas === 'function'
-        ? mostrarPromedioEstrellas(empresa.lat, empresa.lng, true)
-        : 0;
-  
-  
-    // Crear estrellas doradas llenas y vacías
-    const estrellas = Array(5).fill("☆") // Unicode para estrella vacía
-        .map((estrella, index) => index < Math.round(promedioEstrellas) ? "★" : estrella) // Unicode para estrella llena
-        .join("");
-  
-  
-    // Estilos en línea para hacer que las estrellas se vean doradas
-    const popupContent = `<b>${empresa.nombre}</b><br>
-                          <strong>Promedio de Estrellas:</strong> <span style="color: gold; font-size: 1.2em;">${estrellas}</span><br>
-                          <button onclick='borrarEmpresa(${empresa.lat}, ${empresa.lng})'>Borrar Empresa</button>`;
-  
-    return popupContent;
-  }
+
   
 
 
 
   
 
-  // Función para agregar eventos a los marcadores
-  function addMarkerEventHandlers(marker, empresa) {
-    marker.on('click', function (e) {
-      const eventoEmpresaSeleccionada = new CustomEvent("empresaSeleccionada", {
-        detail: { lat: empresa.lat, lng: empresa.lng, nombreEmpresa: empresa.nombre }
-      });
-      document.dispatchEvent(eventoEmpresaSeleccionada);
-    });
-  }
 
-  // Función para borrar una empresa
-  window.borrarEmpresa = function (lat, lng) {
-    const usuarioActual = localStorage.getItem('usuarioActual');
-    const empresaIndex = empresas.findIndex(emp => emp.lat === lat && emp.lng === lng);
 
-    if (empresaIndex !== -1) {
-      const empresa = empresas[empresaIndex];
 
-      // Verificar si el usuario es el creador o el administrador
-      if (empresa.creador !== usuarioActual && usuarioActual !== 'admin') {
-        alert('No tienes permisos para borrar esta empresa.');
-        return;
-      }
-
-      // Verificar si la empresa tiene reseñas asociadas
-      if (empresa.reseñas && empresa.reseñas.length > 0) {
-        alert('No se puede borrar la empresa porque tiene reseñas asociadas.');
-        return;
-      }
-
-      empresas.splice(empresaIndex, 1);
-      actualizarLocalStorage();
-      alert('Empresa borrada correctamente.');
-      map.eachLayer(function (layer) {
-        if (layer instanceof L.Marker && layer.getLatLng().lat === lat && layer.getLatLng().lng === lng) {
-          map.removeLayer(layer);
-        }
-      });
-    } else {
-      alert('Empresa no encontrada.');
-    }
-  };
 
 
 
@@ -436,3 +524,5 @@ if (!window.listenerDireccionSeleccionada) {
   window.listenerDireccionSeleccionada = true;
   console.log("Listener direccionSeleccionada añadido");
 }
+
+
