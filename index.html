@@ -188,55 +188,52 @@
 
         
 
-        <section id="buscar">
-            <h2>Buscador</h2>
-            <div id="buscar-direccion-container" style="margin-bottom: 15px;">
-                <input type="text" id="buscar-direccion" placeholder="Buscar dirección..."
-                    style="width: 70%; padding: 10px; font-size: 1em;">
-                <button id="buscar-btn" style="padding: 10px; font-size: 1em;">Buscar</button>
-            </div>
-            <section id="add-company-form">
-                <h2>Añadir Empresa</h2>
-                <form id="company-form">
-                    <label>Nombre de la Empresa:</label>
-                    <input type="text" id="company-name" required placeholder="Introduce el nombre de la empresa">
-
-                    <label>Sector Laboral:</label>
-                    <select id="sectorSelectAddCompany" required>
-                        <option value="" disabled selected>Selecciona un sector</option>
-                        <option value="Tecnología">Tecnología</option>
-                        <option value="Tienda">Tienda</option>
-                        <option value="Educación">Educación</option>
-                        <option value="Salud">Salud</option>
-                        <option value="Construcción">Construcción</option>
-                        <option value="Finanzas">Finanzas</option>
-                        <option value="Deportes">Deportes</option>
-                        <option value="Turismo">Turismo</option>
-                        <option value="Otros">Otros</option>
-                        <!-- Puedes añadir más opciones aquí -->
-                    </select>
-
-
-                    <label>Dirección:</label>
-                    <input type="text" id="company-address" placeholder="Opcional si proporciona latitud y longitud">
-
-                    <label>Latitud:</label>
-                    <input type="number" id="company-lat" step="any" placeholder="Ej. 37.7749">
-
-                    <label>Longitud:</label>
-                    <input type="number" id="company-lng" step="any" placeholder="Ej. -122.4194">
-
-                    <button type="submit">Añadir Empresa</button>
-                </form>
-
-                <!-- Div para mensajes de éxito o error -->
-                <div id="company-message" style="display:none; color: green; margin-top: 10px;"></div>
-            </section>
+    <section id="buscar">
+        <h2>Buscador</h2>
+        <div id="buscar-direccion-container">
+            <input type="text" id="buscar-direccion" placeholder="Buscar dirección...">
+            <button id="buscar-btn">Buscar</button>
+        </div>
+        <section id="add-company-form">
+            <h2>Añadir Empresa</h2>
+            <form id="company-form">
+                <label for="company-name">Nombre de la Empresa:</label>
+                <input type="text" id="company-name" required placeholder="Introduce el nombre de la empresa">
+    
+                <label for="sectorSelectAddCompany">Sector Laboral:</label>
+                <select id="sectorSelectAddCompany" required>
+                    <option value="" disabled selected>Selecciona un sector</option>
+                    <option value="Tecnología">Tecnología</option>
+                    <option value="Tienda">Tienda</option>
+                    <option value="Educación">Educación</option>
+                    <option value="Salud">Salud</option>
+                    <option value="Construcción">Construcción</option>
+                    <option value="Finanzas">Finanzas</option>
+                    <option value="Deportes">Deportes</option>
+                    <option value="Turismo">Turismo</option>
+                    <option value="Otros">Otros</option>
+                </select>
+    
+                <label for="company-address">Dirección:</label>
+                <input type="text" id="company-address" placeholder="Opcional si proporciona latitud y longitud">
+    
+                <label for="company-lat">Latitud:</label>
+                <input type="number" id="company-lat" step="any" placeholder="Ej. 37.7749">
+    
+                <label for="company-lng">Longitud:</label>
+                <input type="number" id="company-lng" step="any" placeholder="Ej. -122.4194">
+    
+                <button type="submit">Añadir Empresa</button>
+            </form>
+            <div id="company-message" style="display:none; color: green; margin-top: 10px;"></div>
         </section>
-
-        <section id="services">
-
-        </section>
+    </section>
+    
+    <!-- Sección Servicios -->
+    <section id="services">
+        <!-- Mantener vacía pero con estructura -->
+    </section>
+    
 
 
         <section id="chat">
