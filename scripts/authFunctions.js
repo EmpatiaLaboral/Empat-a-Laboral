@@ -263,3 +263,35 @@ window.logout = logout;
 window.closePopupOnClickOutside = closePopupOnClickOutside;
 window.isUserLoggedIn = isUserLoggedIn;
 window.addCompany = addCompany;
+
+// SEO Helper Script - Mejora de Metadatos para Autenticación
+document.addEventListener("DOMContentLoaded", function () {
+    // Añadir meta descripción para la página de autenticación si no existe
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Accede o regístrate en Empatía Laboral para gestionar empresas, explorar reseñas y conectar con nuestra comunidad laboral.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Añadir palabras clave específicas si no existen
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "login, registro, empatía laboral, acceso empresas, comunidad laboral, reseñas empresas";
+        document.head.appendChild(newMetaKeywords);
+    }
+
+    // Cambiar dinámicamente el título de la página según el popup abierto
+    const popupTitle = document.getElementById("popup-title");
+    if (popupTitle) {
+        const originalTitle = document.title;
+        const observer = new MutationObserver(() => {
+            const newTitle = popupTitle.textContent === "Registro" ? "Registrarse | Empatía Laboral" : "Iniciar Sesión | Empatía Laboral";
+            document.title = newTitle || originalTitle;
+        });
+        observer.observe(popupTitle, { childList: true });
+    }
+});
