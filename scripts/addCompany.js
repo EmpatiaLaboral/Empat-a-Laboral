@@ -162,4 +162,43 @@ function añadirEmpresa(nombre, sector, direccion, lat, lng) {
         });
 }
 
+// SEO Helper Script - Mejora de Metadatos Dinámicos
+document.addEventListener("DOMContentLoaded", function () {
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        // Añadir una meta descripción si no existe
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Añade tu empresa al mapa interactivo de Empatía Laboral. Encuentra empresas destacadas por su trato justo y compromiso laboral.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Generar un título dinámico para la página según la actividad del usuario
+    const originalTitle = document.title;
+    document.title = "Añadir Empresa | Empatía Laboral";
+
+    // Monitorear el campo de nombre de la empresa para reflejar cambios en el título
+    const companyNameInput = document.getElementById("company-name");
+    if (companyNameInput) {
+        companyNameInput.addEventListener("input", function () {
+            const companyName = companyNameInput.value.trim();
+            if (companyName) {
+                document.title = `Añadiendo: ${companyName} | Empatía Laboral`;
+            } else {
+                document.title = originalTitle;
+            }
+        });
+    }
+
+    // Añadir palabras clave dinámicas basadas en el contenido del formulario
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "empresas, mapa interactivo, añadir empresa, trato justo, equidad laboral, reseñas de empresas";
+        document.head.appendChild(newMetaKeywords);
+    }
+});
+
+
 });
