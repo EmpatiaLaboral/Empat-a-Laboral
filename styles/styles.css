@@ -311,7 +311,7 @@ form button:active {
 
 /* Estilos globales */
 body {
-    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background: linear-gradient(135deg, #fdfdfd, #fdbb2d, #fdbb2d);
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
