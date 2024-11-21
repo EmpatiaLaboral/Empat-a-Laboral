@@ -255,3 +255,39 @@ if (!window.listenerDireccionSeleccionada) {
     window.listenerDireccionSeleccionada = true;
     console.log("Listener direccionSeleccionada añadido");
 }
+
+
+// SEO Helper Script - Mejora de Metadatos para Búsqueda
+document.addEventListener("DOMContentLoaded", function () {
+    // Añadir meta descripción para la página de búsqueda si no existe
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Busca empresas en el mapa interactivo de Empatía Laboral. Encuentra información detallada sobre empresas destacadas por su trato justo y equidad laboral.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Añadir palabras clave específicas si no existen
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "buscador de empresas, mapa interactivo, reseñas de empresas, trato justo, equidad laboral";
+        document.head.appendChild(newMetaKeywords);
+    }
+
+    // Cambiar dinámicamente el título de la página según las búsquedas
+    const inputBuscar = document.getElementById("buscar-direccion");
+    if (inputBuscar) {
+        const originalTitle = document.title;
+        inputBuscar.addEventListener("input", function () {
+            const query = inputBuscar.value.trim();
+            if (query.length > 0) {
+                document.title = `Buscando: ${query} | Empatía Laboral`;
+            } else {
+                document.title = originalTitle;
+            }
+        });
+    }
+});
