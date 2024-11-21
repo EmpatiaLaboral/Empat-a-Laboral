@@ -63,3 +63,4 @@ function generarFooter() {
 
 // Llamar a la función para generar el footer cuando la página haya cargado
 window.onload = generarFooter;
+

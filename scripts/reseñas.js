@@ -262,3 +262,32 @@ function mostrarPromedioEstrellas(lat, lng, returnAsNumber = false) {
   // Retorna el HTML de estrellas doradas
   return `<p><strong>Promedio de Estrellas:</strong> <span style="color: gold; font-size: 1.2em;">${estrellasHTML}</span></p>`;
 }
+// SEO Helper Script - Mejora de Metadatos para Reseñas
+document.addEventListener("DOMContentLoaded", function () {
+  // Añadir meta descripción específica si no existe
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (!metaDescription) {
+      const newMetaDescription = document.createElement("meta");
+      newMetaDescription.name = "description";
+      newMetaDescription.content = "Consulta reseñas confiables de empresas destacadas en Empatía Laboral. Comparte tu experiencia y ayuda a construir un entorno laboral más justo.";
+      document.head.appendChild(newMetaDescription);
+  }
+
+  // Añadir palabras clave específicas si no existen
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (!metaKeywords) {
+      const newMetaKeywords = document.createElement("meta");
+      newMetaKeywords.name = "keywords";
+      newMetaKeywords.content = "reseñas empresas, trato justo, transparencia laboral, reseñas confiables, reseñas usuarios, empresas destacadas";
+      document.head.appendChild(newMetaKeywords);
+  }
+
+  // Cambiar dinámicamente el título según la empresa seleccionada
+  const originalTitle = document.title;
+  document.addEventListener("empresaSeleccionada", function (event) {
+      const { nombreEmpresa } = event.detail;
+      document.title = nombreEmpresa
+          ? `Reseñas de ${nombreEmpresa} | Empatía Laboral`
+          : originalTitle;
+  });
+});

@@ -123,3 +123,46 @@
 
 
 
+// SEO Helper Script - Mejora de Metadatos para Marcadores de Leaflet
+document.addEventListener("DOMContentLoaded", function () {
+    // Añadir meta descripción específica si no existe
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Explora un mapa interactivo con marcadores personalizados en Empatía Laboral. Descubre empresas destacadas por su trato justo y transparencia laboral.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Añadir palabras clave específicas si no existen
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "mapa interactivo, marcadores personalizados, Leaflet, empresas, reseñas, trato justo, transparencia laboral";
+        document.head.appendChild(newMetaKeywords);
+    }
+
+    // Cambiar dinámicamente el título del mapa según el número de marcadores
+    if (L && L.AwesomeMarkers) {
+        const originalTitle = document.title;
+        const mapMarkers = document.querySelectorAll(".awesome-marker-icon");
+
+        // Actualizar el título con el número de marcadores en el mapa
+        const updateTitleWithMarkers = () => {
+            const markerCount = mapMarkers.length;
+            if (markerCount > 0) {
+                document.title = `Mapa Interactivo: ${markerCount} empresas destacadas | Empatía Laboral`;
+            } else {
+                document.title = originalTitle;
+            }
+        };
+
+        // Observar cambios en los marcadores para actualizar el título dinámicamente
+        const observer = new MutationObserver(updateTitleWithMarkers);
+        const mapContainer = document.querySelector(".leaflet-marker-pane");
+        if (mapContainer) {
+            observer.observe(mapContainer, { childList: true });
+        }
+    }
+});

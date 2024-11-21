@@ -526,3 +526,39 @@ if (!window.listenerDireccionSeleccionada) {
 }
 
 
+// SEO Helper Script - Mejora de Metadatos para el Mapa
+document.addEventListener("DOMContentLoaded", function () {
+  // Añadir meta descripción específica si no existe
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (!metaDescription) {
+      const newMetaDescription = document.createElement("meta");
+      newMetaDescription.name = "description";
+      newMetaDescription.content = "Explora un mapa interactivo con marcadores personalizados en Empatía Laboral. Encuentra empresas destacadas por su trato justo y equidad laboral.";
+      document.head.appendChild(newMetaDescription);
+  }
+
+  // Añadir palabras clave específicas si no existen
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (!metaKeywords) {
+      const newMetaKeywords = document.createElement("meta");
+      newMetaKeywords.name = "keywords";
+      newMetaKeywords.content = "mapa interactivo, marcadores personalizados, empresas, reseñas, trato justo, equidad laboral";
+      document.head.appendChild(newMetaKeywords);
+  }
+
+  // Cambiar dinámicamente el título del mapa según la actividad
+  const originalTitle = document.title;
+
+  if (window.empresas && window.empresas.length > 0) {
+      const markerCount = window.empresas.length;
+      document.title = `Mapa Interactivo: ${markerCount} empresas destacadas | Empatía Laboral`;
+  } else {
+      document.title = originalTitle;
+  }
+
+  // Actualizar el título dinámicamente cuando se añaden nuevas empresas
+  document.addEventListener("nuevaEmpresa", function () {
+      const markerCount = window.empresas.length;
+      document.title = `Mapa Interactivo: ${markerCount} empresas destacadas | Empatía Laboral`;
+  });
+});

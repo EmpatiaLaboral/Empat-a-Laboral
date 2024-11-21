@@ -91,3 +91,39 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
+// SEO Helper Script - Mejora de Metadatos para el Botón de Información
+document.addEventListener("DOMContentLoaded", function () {
+    // Añadir meta descripción si no existe
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Descubre cómo usar Empatía Laboral con nuestra guía interactiva. Aprende a buscar empresas, añadir reseñas y usar el chat en tiempo real.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Añadir palabras clave relevantes si no existen
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "guía de uso, mapa interactivo, empatía laboral, añadir reseñas, chat en vivo, empresas destacadas";
+        document.head.appendChild(newMetaKeywords);
+    }
+
+    // Cambiar dinámicamente el título cuando se abre el cuadro de información
+    const originalTitle = document.title;
+    const infoBox = document.getElementById("info-box");
+    const infoButton = document.getElementById("info-button");
+
+    if (infoButton && infoBox) {
+        infoButton.addEventListener("click", function () {
+            if (infoBox.style.display === "block") {
+                document.title = "Guía de Uso | Empatía Laboral";
+            } else {
+                document.title = originalTitle;
+            }
+        });
+    }
+});

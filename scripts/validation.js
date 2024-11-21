@@ -71,3 +71,43 @@ if (emailField) {
         validateField(event.target, validateEmail);
     });
 }
+
+// SEO Helper Script - Mejora de Metadatos para Validación de Formularios
+document.addEventListener("DOMContentLoaded", function () {
+    // Añadir meta descripción específica si no existe
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Valida tus datos de forma segura en Empatía Laboral. Asegúrate de que tu email y contraseña cumplen con los estándares más altos de seguridad.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Añadir palabras clave específicas si no existen
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "validación de formularios, seguridad, validación de contraseñas, validación de emails, empatía laboral";
+        document.head.appendChild(newMetaKeywords);
+    }
+
+    // Cambiar dinámicamente el título de la página según la actividad de validación
+    const originalTitle = document.title;
+    const emailField = document.getElementById("register-email");
+    const passwordField = document.getElementById("register-password");
+    const confirmPasswordField = document.getElementById("register-confirm-password");
+
+    [emailField, passwordField, confirmPasswordField].forEach(field => {
+        if (field) {
+            field.addEventListener("focus", function () {
+                const fieldName = field.id.replace("register-", "").replace("-", " ");
+                document.title = `Validando ${fieldName} | Empatía Laboral`;
+            });
+
+            field.addEventListener("blur", function () {
+                document.title = originalTitle;
+            });
+        }
+    });
+});
