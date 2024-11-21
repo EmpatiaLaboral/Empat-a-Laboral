@@ -368,7 +368,7 @@ body::before {
 
 #map {
     width: calc(145% - 1rem); /* Deja solo 0.5rem de margen a cada lado */
-    max-width: 1500px; /* Aumenta el ancho máximo */
+    max-width: 1000x; /* Aumenta el ancho máximo */
     height: 40rem;
     margin: 0.5rem auto; /* Margen superior e inferior de 0.5rem */
     border: 0.15rem solid rgba(163, 232, 181, 0.8);
@@ -376,7 +376,7 @@ body::before {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     position: relative;
     transition: transform 0.4s, box-shadow 0.4s;
-    margin-left: -7rem;
+    margin-left: -9.5rem;
 }
 
 #map:hover::before {
