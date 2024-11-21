@@ -49,12 +49,19 @@ chatRoomRef.orderBy('timestamp', 'asc').onSnapshot((snapshot) => {
     snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
             const { username, message } = change.doc.data();
-            const chatManager = new ChatManager(document.getElementById('messages'));
-            chatManager.sendMessage(username, message); // Añade el mensaje a la UI
+            const messageId = change.doc.id; // ID único del mensaje en Firestore
+            
+            // Verifica si el mensaje ya fue procesado
+            if (!processedMessages.has(messageId)) {
+                processedMessages.add(messageId); // Marca el mensaje como procesado
+                const chatManager = new ChatManager(document.getElementById('messages'));
+                chatManager.sendMessage(username, message); // Añade el mensaje a la UI
+            }
         }
     });
 });
 
+const processedMessages = new Set();
 
 // Archivo de UI para el chat
 function sanitizeInput(input) {
@@ -73,7 +80,6 @@ function handleSendButtonClick() {
 
     const username = localStorage.getItem("usuarioActual") || "Anónimo";
     const chatManager = new ChatManager(document.getElementById('messages'));
-    chatManager.sendMessage(username, message); // Agregar mensaje a la UI local
 
     // Guardar el mensaje en Firestore
     db.collection('chatroom').add({
