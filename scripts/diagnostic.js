@@ -143,4 +143,48 @@ function checkSendMessage() {
         // Verificar el envío de mensajes en el chat
         checkSendMessage();
     });
+
+    // SEO Helper Script - Mejora de Metadatos para Diagnóstico
+document.addEventListener("DOMContentLoaded", function () {
+    // Añadir meta descripción si no existe
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Herramienta de diagnóstico para Empatía Laboral. Verifica la carga de scripts, imágenes y estilos para garantizar un funcionamiento óptimo.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Añadir palabras clave específicas si no existen
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "diagnóstico, depuración, scripts, imágenes, estilos, empatía laboral";
+        document.head.appendChild(newMetaKeywords);
+    }
+
+    // Cambiar dinámicamente el título según el resultado del diagnóstico
+    const originalTitle = document.title;
+    const diagnosticSummary = document.createElement('div');
+    diagnosticSummary.id = 'diagnostic-summary';
+    diagnosticSummary.style.display = 'none';
+    document.body.appendChild(diagnosticSummary);
+
+    const observer = new MutationObserver(() => {
+        const errors = diagnosticSummary.querySelectorAll('.error').length;
+        const warnings = diagnosticSummary.querySelectorAll('.warning').length;
+
+        if (errors > 0) {
+            document.title = `Errores detectados (${errors}) | Empatía Laboral`;
+        } else if (warnings > 0) {
+            document.title = `Advertencias detectadas (${warnings}) | Empatía Laboral`;
+        } else {
+            document.title = `Diagnóstico limpio | Empatía Laboral`;
+        }
+    });
+
+    observer.observe(diagnosticSummary, { childList: true, subtree: true });
+});
+
 })();
