@@ -1,0 +1,7 @@
+git add .
+
+
+git commit -m "Describe los cambios que realizaste"
+
+
+git push origin main

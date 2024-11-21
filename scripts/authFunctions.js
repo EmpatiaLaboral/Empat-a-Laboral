@@ -11,13 +11,15 @@ export function openPopup(type) {
     popupForm.innerHTML = createForm(type);
     popupForm.onsubmit = type === 'register' ? handleRegister : handleLogin;
 
-    popup.style.display = 'block';
+    // Limpia cualquier listener previo para evitar conflictos
+    document.removeEventListener('click', closePopupOnClickOutside);
 
-    // Añadir evento para cerrar el pop-up al hacer clic fuera de él
+    popup.style.display = 'block';
     setTimeout(() => {
         document.addEventListener('click', closePopupOnClickOutside);
     }, 0);
 }
+
 
 function createForm(type) {
     if (type === 'register') {
