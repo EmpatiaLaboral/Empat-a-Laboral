@@ -234,6 +234,46 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let isListenerRegistered = false;
 
+
+    // SEO Helper Script - Mejora de Metadatos para el Chat
+document.addEventListener("DOMContentLoaded", function () {
+    // Añadir meta descripción específica si no existe
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        const newMetaDescription = document.createElement("meta");
+        newMetaDescription.name = "description";
+        newMetaDescription.content = "Participa en el chat en vivo de Empatía Laboral. Conecta con otros usuarios, comparte ideas y descubre empresas destacadas por su trato justo.";
+        document.head.appendChild(newMetaDescription);
+    }
+
+    // Añadir palabras clave relevantes si no existen
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        const newMetaKeywords = document.createElement("meta");
+        newMetaKeywords.name = "keywords";
+        newMetaKeywords.content = "chat en vivo, empatía laboral, conexión usuarios, empresas, trato justo, reseñas laborales";
+        document.head.appendChild(newMetaKeywords);
+    }
+
+    // Cambiar dinámicamente el título según la actividad del chat
+    const originalTitle = document.title;
+    const messagesContainer = document.getElementById('messages');
+    if (messagesContainer) {
+        const observer = new MutationObserver(() => {
+            const lastMessage = messagesContainer.lastElementChild;
+            if (lastMessage) {
+                const username = lastMessage.querySelector('.username')?.textContent || "Usuario";
+                const messagePreview = lastMessage.querySelector('.message')?.textContent || "Nuevo mensaje";
+                document.title = `Chat: ${username} dice "${messagePreview}" | Empatía Laboral`;
+            } else {
+                document.title = originalTitle;
+            }
+        });
+
+        observer.observe(messagesContainer, { childList: true });
+    }
+});
+
    
     
 
