@@ -90,4 +90,41 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (error) {
     console.error("Error en la inicialización de filtros.js:", error);
   }
+
+  // SEO Helper Script - Mejora de Metadatos para Filtros
+document.addEventListener("DOMContentLoaded", function () {
+  // Añadir meta descripción específica para la página de filtros si no existe
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (!metaDescription) {
+      const newMetaDescription = document.createElement("meta");
+      newMetaDescription.name = "description";
+      newMetaDescription.content = "Explora empresas utilizando filtros avanzados en Empatía Laboral. Filtra por sector, valoración mínima y encuentra las mejores empresas por su trato justo.";
+      document.head.appendChild(newMetaDescription);
+  }
+
+  // Añadir palabras clave específicas relacionadas con filtros
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (!metaKeywords) {
+      const newMetaKeywords = document.createElement("meta");
+      newMetaKeywords.name = "keywords";
+      newMetaKeywords.content = "filtros de empresas, sectores laborales, valoración mínima, mapa interactivo, reseñas de empresas";
+      document.head.appendChild(newMetaKeywords);
+  }
+
+  // Actualizar dinámicamente el título según los filtros aplicados
+  const sectorSelect = document.getElementById("sectorSelect");
+  const valoracionMinInput = document.getElementById("valoracionMin");
+  const originalTitle = document.title;
+
+  document.addEventListener("aplicarFiltrosMapa", (event) => {
+      const { sectores, valoracionMin } = event.detail;
+      const sectoresTexto = sectores.length > 0 ? sectores.join(", ") : "Todos los sectores";
+      document.title = `Buscando en: ${sectoresTexto} con valoración mínima ${valoracionMin} | Empatía Laboral`;
+  });
+
+  document.addEventListener("restablecerFiltrosMapa", () => {
+      document.title = originalTitle;
+  });
+});
+
 });
