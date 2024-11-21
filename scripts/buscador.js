@@ -7,8 +7,21 @@ document.addEventListener("DOMContentLoaded", function () {
     sugerenciasContainer.id = "sugerencias-container";
     inputBuscar.parentNode.appendChild(sugerenciasContainer);
 
-    let empresas = JSON.parse(localStorage.getItem('empresas')) || [];
+    let empresas = [];
 
+    // Función para cargar empresas desde Firebase Firestore
+    async function cargarEmpresas() {
+        const empresasSnapshot = await db.collection("empresas").get();
+        empresas = empresasSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        console.log("Empresas cargadas desde Firebase:", empresas);
+    }
+    
+    // Llama a la función para cargar las empresas al cargar la página
+    cargarEmpresas().catch(error => console.error("Error al cargar empresas desde Firebase:", error));
+    
     let debounceTimer;
     inputBuscar.addEventListener("input", function () {
         clearTimeout(debounceTimer);
