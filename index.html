@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Empatía Laboral: Encuentra reseñas confiables sobre empresas con trato justo a sus empleados. Comparte tus experiencias y ayuda a construir un mundo laboral más justo.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empatía Laboral</title>
 
     <!-- CSS de Leaflet -->
@@ -26,93 +25,6 @@
 <!-- Archivo de configuración de Firebase -->
 <script src="scripts/firebaseConfig.js"></script>
 
-
-    <style>
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .nav-list {
-                flex-direction: column;
-                margin: 0;
-                padding: 0;
-            }
-
-            .button-container {
-                margin-top: 1rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            #main-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            #services,
-            #map,
-            #chat {
-                width: 100%;
-                margin: 10px 0;
-            }
-
-            #services-box,
-            #chat-container {
-                width: 90%;
-            }
-
-            #map {
-                height: 30rem;
-                width: 90%;
-            }
-
-            #reseñas-container {
-                width: 90%;
-                margin: 10px auto;
-            }
-
-            #user-list,
-            #chat-box {
-                width: 100%;
-            }
-
-            .social-logo {
-                width: 30px;
-                height: 30px;
-                margin: 0.5rem;
-            }
-
-            .logo {
-                max-width: 80%;
-                height: auto;
-            }
-
-            .site-title {
-                font-size: 1.5rem;
-            }
-        }
-
-        .password-container {
-            position: relative;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -130,15 +42,12 @@
                     <li><a href="#chat">Chat</a></li>
                 </ul>
                 <div class="button-container">
-                    <button type="button" class="open-popup-button login-button" aria-label="Iniciar sesión"
-                        onclick="openPopup('login')">Iniciar Sesión</button>
-                    <div id="success-message" aria-live="polite" style="display: none; color: green;">¡Operación
-                        realizada con éxito!</div>
-                    <button type="button" class="open-popup-button register-button" aria-label="Registrarse"
-                        onclick="openPopup('register')">Registrarse</button>
-                    <button type="button" class="logout-button" aria-label="Cerrar sesión" onclick="logout()">Cerrar
-                        Sesión</button>
+                    <button type="button" class="open-popup-button login-button" aria-label="Iniciar sesión" onclick="openPopup('login')">Iniciar Sesión</button>
+                    <div id="success-message" aria-live="polite">¡Operación realizada con éxito!</div>
+                    <button type="button" class="open-popup-button register-button" aria-label="Registrarse" onclick="openPopup('register')">Registrarse</button>
+                    <button type="button" class="logout-button" aria-label="Cerrar sesión" onclick="logout()">Cerrar Sesión</button>
                 </div>
+                
             </nav>
         </div>
     </header>
@@ -228,7 +137,7 @@
     
                 <button type="submit">Añadir Empresa</button>
             </form>
-            <div id="company-message" style="display:none; color: green; margin-top: 10px;"></div>
+            <div id="company-message"></div>
         </section>
     </section>
     
@@ -333,8 +242,8 @@
     </div>
 
     <!-- Elemento loader -->
-    <div id="loader" style="display: none;" aria-live="polite">Cargando...</div>
-    <div id="success-message" style="display: none;" aria-live="polite">¡Éxito!</div>
+    <div id="loader" aria-live="polite">Cargando...</div>
+    <div id="success-message" aria-live="polite">¡Éxito!</div>
 
     <!-- Scripts de Leaflet y AwesomeMarkers -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" defer></script>

@@ -1,113 +1,64 @@
-/* Estilos definitivos para dispositivos móviles */
-@media (max-width: 768px) {
-  body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-sizing: border-box;
-      overflow-x: hidden;
-  }
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
 
-  #main-container,
-  #buscar,
-  #map,
-  #reseñas-container,
-  #chat-container,
-  #services {
-      width: 95%; /* Margen uniforme a ambos lados */
-      max-width: 600px; /* Limita el ancho máximo */
-      margin: 0 auto 20px auto; /* Centrados con margen inferior */
-      padding: 15px;
-      background-color: #ffffff; /* Fondo claro */
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  }
+.open-popup-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
 
-  #map {
-      height: 350px;
-      overflow: hidden;
-  }
+.open-popup-button:hover {
+    background-color: #0056b3;
+}
 
-  header, footer {
-      width: 95%;
-      max-width: 600px;
-      text-align: center;
-      padding: 15px 0;
-      background-color: #f8f9fa;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
+.login-button {
+    background-color: #28a745;
+}
 
-  .nav-list li a {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px 15px;
-      text-align: center;
-      background-color: #e9ecef;
-      border-radius: 5px;
-      color: #333;
-      text-decoration: none;
-      font-size: 1rem;
-  }
+.login-button:hover {
+    background-color: #218838;
+}
 
-  .nav-list li a:hover {
-      background-color: #007bff;
-      color: #fff;
-  }
+.register-button {
+    background-color: #ffc107;
+}
 
-  #buscar-direccion-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-  }
+.register-button:hover {
+    background-color: #e0a800;
+}
 
-  #buscar-direccion,
-  #buscar-btn {
-      width: 90%;
-      padding: 10px;
-      font-size: 1em;
-  }
+.logout-button {
+    background-color: #dc3545;
+}
 
-  #add-company-form {
-      text-align: center;
-      margin-top: 20px;
-  }
+.logout-button:hover {
+    background-color: #c82333;
+}
 
-  #add-company-form form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-  }
-
-  #add-company-form label,
-  #add-company-form input,
-  #add-company-form select,
-  #add-company-form button {
-      width: 90%;
-      margin: 0 auto;
-  }
-
-  #add-company-form button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-  }
-
-  #add-company-form button:hover {
-      background-color: #0056b3;
-  }
-
-  #services {
-      height: 50px; /* Altura mínima para mantener la estructura */
-      background-color: transparent;
-  }
+#success-message {
+    display: none;
+    color: green;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+#company-message {
+    display: none;
+    color: green;
+    margin-top: 10px;
+}
+#loader {
+    display: none;
+}
+#success-message {
+    display: none;
+    color: green;
 }
