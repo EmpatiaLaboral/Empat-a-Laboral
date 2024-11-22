@@ -136,10 +136,7 @@ let onlineUsersContainer;
 let onlineUsersCountElement;
 
 let onlineUsers = [
-    { name: 'Usuario 1', avatar: 'images/avatar1.png' },
-    { name: 'Usuario 2', avatar: 'images/avatar2.png' },
-    { name: 'Usuario 3', avatar: 'images/avatar3.png' },
-    { name: 'Usuario 4', avatar: 'images/avatar4.png' }
+
 ];
 
 function displayOnlineUsers() {
