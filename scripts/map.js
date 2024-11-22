@@ -11,17 +11,6 @@ const coloresPorSector = {
   "Otros": "brown"
 };
 
-
-
-
-
-
-
-
-
-
-
-
 function getPopupContent(empresa) {
   if (!empresa || !empresa.nombre || !empresa.lat || !empresa.lng) {
       console.error("Datos incompletos para generar el popup:", empresa);
@@ -104,7 +93,55 @@ document.addEventListener("DOMContentLoaded", function () {
         maxBoundsViscosity: 1.0, // Restringir completamente la vista a los límites
         minZoom: 2 // Limitar el nivel de zoom mínimo
     }).setView([20, 0], 2);
+
+    // Nivel mínimo de zoom para mostrar las empresas
+const zoomMinimo = 12;
+
+// Función para mostrar u ocultar empresas según el nivel de zoom
+function controlarVisibilidadMarcadores() {
+    if (!Array.isArray(empresas) || empresas.length === 0) {
+        console.warn("Aún no hay empresas cargadas para controlar su visibilidad.");
+        return;
+    }
+
+    const nivelZoom = map.getZoom();
+
+    empresas.forEach(empresa => {
+        if (empresa.marker) {
+            if (nivelZoom >= zoomMinimo) {
+                if (!map.hasLayer(empresa.marker)) {
+                    map.addLayer(empresa.marker); // Mostrar chincheta
+                }
+            } else {
+                if (map.hasLayer(empresa.marker)) {
+                    map.removeLayer(empresa.marker); // Ocultar chincheta
+                }
+            }
+        }
+    });
 }
+
+// Escuchar cambios en los datos de Firebase
+db.collection('empresas').onSnapshot(snapshot => {
+    snapshot.docChanges().forEach(change => {
+        if (change.type === 'added') {
+            const empresa = change.doc.data();
+            empresas.push(empresa);
+
+            // Crear el marcador y añadirlo al mapa
+            crearMarcadorEmpresa(empresa);
+        }
+    });
+
+    // Configurar la visibilidad inicial de las empresas
+    controlarVisibilidadMarcadores();
+});
+
+// Evento para controlar la visibilidad al hacer zoom
+map.on('zoomend', controlarVisibilidadMarcadores);
+
+}
+
 
 
 
@@ -562,3 +599,4 @@ document.addEventListener("DOMContentLoaded", function () {
       document.title = `Mapa Interactivo: ${markerCount} empresas destacadas | Empatía Laboral`;
   });
 });
+

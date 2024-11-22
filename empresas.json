@@ -1,0 +1,73 @@
+[
+    {
+      "nombre": "Hospital Universitario Niño Jesús",
+      "direccion": "Avenida de Menéndez Pelayo, 65, 28009 Madrid",
+      "lat": 40.4133,
+      "lng": -3.6783,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario Santa Cristina",
+      "direccion": "Calle Maestro Amadeo Vives, 2, 28009 Madrid",
+      "lat": 40.4217,
+      "lng": -3.6744,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Central de la Defensa Gómez Ulla",
+      "direccion": "Glorieta del Ejército, 1, 28047 Madrid",
+      "lat": 40.385,
+      "lng": -3.745,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario Infanta Cristina",
+      "direccion": "Avenida de los Reyes Católicos, 21, 28935 Móstoles, Madrid",
+      "lat": 40.3333,
+      "lng": -3.8711,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario del Sureste",
+      "direccion": "Ronda del Sur, s/n, 28500 Arganda del Rey, Madrid",
+      "lat": 40.2927,
+      "lng": -3.4444,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario de Villalba",
+      "direccion": "Camino de la Poveda, s/n, 28400 Collado Villalba, Madrid",
+      "lat": 40.6375,
+      "lng": -4.01,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario Guadarrama",
+      "direccion": "Calle de la Serrana, 6, 28440 Guadarrama, Madrid",
+      "lat": 40.6728,
+      "lng": -4.0884,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario La Fuenfría",
+      "direccion": "Carretera de la Fuenfría, s/n, 28470 Cercedilla, Madrid",
+      "lat": 40.7403,
+      "lng": -4.045,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario Virgen de la Torre",
+      "direccion": "Calle Puerto de Lumbreras, 5, 28031 Madrid",
+      "lat": 40.381,
+      "lng": -3.621,
+      "sector": "Salud"
+    },
+    {
+      "nombre": "Hospital Universitario Infanta Elena",
+      "direccion": "Avenida de los Reyes Católicos, s/n, 28342 Valdemoro, Madrid",
+      "lat": 40.1895,
+      "lng": -3.6789,
+      "sector": "Salud"
+    }
+  ]
+  
