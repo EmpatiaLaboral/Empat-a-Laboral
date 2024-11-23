@@ -32,7 +32,12 @@ document.addEventListener("DOMContentLoaded", function() {
         5. Chat en Vivo: Interactúa en el chat en vivo para compartir información y dudas en tiempo real. En la sección de usuarios conectados, verás una lista de personas online. Para enviar mensajes, necesitas estar registrado.
         6. Consultas con Chat: En la sección de consultas, tienes un cuadro de texto donde puedes escribir preguntas sobre cómo usar la web. La IA responderá y resolverá tus dudas.
         Si tienes dudas o sugerencias, puedes contactarnos a través del formulario de contacto en el pie de página. Empatía Laboral está en constante mejora para ofrecerte la mejor experiencia.
-    `;
+        Platón escribe que el verdadero navegante debe estudiar las estaciones del año, el cielo, las estrellas, los vientos y todas las demás materias propias de su profesión. Si realmente es apto para controlar la nave, piensa que es del todo imposible adquirir la destreza profesional necesaria para tal control y que no existe el arte de la navegación.
+        ¿Cuánto podría saber realmente un miembro del Consejo de los 500 elegido al azar? ¿Cuánto podría aportar plenamente a la sociedad? ¿Deberíamos permitir que un miembro aleatorio de la sociedad tuviera algún poder?
+        En su lugar, Platón abogaba por la idea de un rey filósofo, un hombre que estudia la sabiduría, la lógica y el razonamiento, un hombre que dedique su vida a comprender cómo ser un navegante de la sabiduría.
+        Platón decía más bien que la sociedad que hemos descrito nunca podrá hacerse realidad ni ver la luz del día y que no habrá fin a los problemas de los estados, o de hecho, mi querido Glaucón, de la propia humanidad hasta que los filósofos se conviertan en gobernantes de este mundo o hasta que los que ahora llamamos reyes y gobernantes se conviertan real y verdaderamente en filósofos, y el poder político y la filosofía lleguen así a las mismas manos.
+        Solo hay un problema con la cita de Platón: todos los líderes se creen reyes filósofos, todos piensan que sus pensamientos son los mejores, desde Yi el Grande en China hasta los libaneses del Imperio Hitita, pasando por Siddhartha Gautama del reino de Magadha en la India.
+            `;
 
     // Configuración de síntesis de voz
     const speech = new SpeechSynthesisUtterance(textoExplicativo);
