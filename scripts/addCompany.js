@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const empresaForm = document.getElementById("company-form");
     const empresaMessage = document.getElementById("company-message");
@@ -34,25 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     .then(response => response.json())
                     .then(data => {
                         if (data && data.length > 0) {
-                            data.forEach(sugerencia => {
-                                const item = document.createElement("li");
-                                item.classList.add("sugerencia-item");
-                                item.textContent = sugerencia.display_name;
-                                item.addEventListener("click", function () {
-                                    sugerenciasContainer.innerHTML = "";
-                                    direccionInput.value = sugerencia.display_name;
-                                    // Opcional: Asignar coordenadas obtenidas
-                                    document.getElementById("company-lat").value = sugerencia.lat;
-                                    document.getElementById("company-lng").value = sugerencia.lon;
-                                });
-                                sugerenciasContainer.appendChild(item);
-                            });
-                        } else {
-                            mostrarMensajeNoResultados();
+                            // Procesar y mostrar sugerencias
                         }
-                    })
-                    .catch(error => {
-                        console.error("Error al buscar sugerencias:", error);
                     });
             }
         }, 300);
@@ -66,6 +48,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     empresaForm.addEventListener("submit", function (event) {
+        const termsCheckbox = document.getElementById("terms-checkbox");
+        if (!termsCheckbox || !termsCheckbox.checked) {
+            empresaMessage.textContent = "Debes aceptar los términos antes de añadir una empresa.";
+            empresaMessage.style.color = "red";
+            empresaMessage.style.display = "block";
+            setTimeout(() => { empresaMessage.style.display = "none"; }, 3000);
+            event.preventDefault(); // Cancela el envío si no se aceptaron los términos
+            return;
+        }
+
         event.preventDefault();
         console.log("Formulario de empresa enviado");
 
