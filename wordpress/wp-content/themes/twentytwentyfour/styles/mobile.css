@@ -1,0 +1,112 @@
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+    /* General */
+    body {
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    /* Header */
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+    }
+
+    .logo-title-container {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .logo {
+        max-width: 8rem;
+        margin: 0.5rem 0;
+    }
+
+    nav a {
+        padding: 0.3rem;
+        margin: 0.2rem;
+        font-size: 0.9rem;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+    }
+
+    /* Main Container */
+    #main-container {
+        grid-template-columns: 1fr;
+        grid-gap: 1rem;
+        padding: 1rem;
+    }
+
+    #map {
+        width: 100%;
+        height: 20rem;
+        margin: 0 auto;
+    }
+
+    #reviews, #chat {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Chat */
+    #chat-container {
+        width: 100%;
+        padding: 1rem;
+        height: auto;
+    }
+
+    #messages {
+        width: 100%;
+        height: 20rem;
+    }
+
+    #message-input {
+        width: calc(100% - 1.5rem);
+    }
+
+    /* Footer */
+    #footer {
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    /* Popups */
+    .popup-content {
+        width: 90%;
+        max-width: 20rem;
+        padding: 1rem;
+    }
+
+    /* Formulario */
+    #add-company-form {
+        max-width: 90%;
+        margin: 1rem auto;
+    }
+
+    /* Cookies Banner */
+    .cookie-banner {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .cookie-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Botones */
+    button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        width: auto;
+    }
+}

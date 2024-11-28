@@ -155,3 +155,443 @@
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
     outline: none !important;
 }
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background: #f4f4f4;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #283593, #0288d1); /* Azul oscuro profesional */
+    color: #ffffff;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Título del sitio */
+header .site-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin: 0;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+/* Navegación */
+header .nav-list {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+    margin-top: 1rem;
+}
+
+header .nav-list li {
+    margin: 0 1.5rem;
+}
+
+header .nav-list li a {
+    color: #e3f2fd; /* Azul claro */
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+header .nav-list li a:hover {
+    color: #00e676; /* Verde brillante */
+    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+}
+
+/* Barra activa */
+header .nav-list li a::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 3px;
+    background-color: #00e676; /* Línea de énfasis */
+    transition: width 0.3s ease-in-out;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+header .nav-list li a:hover::after {
+    width: 100%; /* Línea visible al pasar el ratón */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    header .nav-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    header .nav-list li {
+        margin: 0;
+    }
+}
+
+
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(to right, #4caf50, #8bc34a);
+    color: #fff;
+}
+
+.hero-section .hero-text {
+    max-width: 50%;
+}
+
+.hero-section .hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section .cta-buttons {
+    margin-top: 1rem;
+}
+
+.hero-section .cta-buttons .btn-primary,
+.hero-section .cta-buttons .btn-secondary {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.hero-section .btn-primary {
+    background: #ff9800;
+    color: #fff;
+}
+
+.hero-section .btn-primary:hover {
+    background: #e65100;
+}
+
+.hero-section .btn-secondary {
+    background: #00bcd4;
+    color: #fff;
+}
+
+.hero-section .btn-secondary:hover {
+    background: #008ba3;
+}
+
+.hero-section .hero-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Features Section */
+.features-section {
+    text-align: center;
+    background: #fff;
+    padding: 2rem 0;
+}
+
+.features-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #4caf50;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.features-grid .feature {
+    width: 30%;
+    background: #fff;
+    margin: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.features-grid .feature img {
+    width: 60px;
+    margin-bottom: 1rem;
+}
+
+.features-grid .feature h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.features-grid .feature p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* How It Works Section */
+.how-it-works-section {
+    background: #eceff1;
+    padding: 2rem 0;
+}
+
+.how-it-works-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #4caf50;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.step {
+    width: 30%;
+    text-align: center;
+    padding: 1.5rem;
+    background: #fff;
+    margin: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.step-number {
+    display: inline-block;
+    font-size: 2rem;
+    background: #4caf50;
+    color: #fff;
+    border-radius: 50%;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Testimonials */
+.testimonials-section {
+    background: #f5f5f5;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.testimonials-section h2 {
+    font-size: 2rem;
+    color: #4caf50;
+}
+
+.testimonial-carousel {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.testimonial {
+    width: 45%;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+footer .social-links img {
+    width: 30px;
+    margin: 0 0.5rem;
+    transition: transform 0.3s;
+}
+
+footer .social-links img:hover {
+    transform: scale(1.2);
+}
+.share-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.share-container p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.social-link {
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #4caf50; /* Cambia el color al pasar el cursor */
+}
+
+.social-link .fab {
+    display: inline-block;
+    line-height: 1.5;
+}
+/* Opiniones de Usuarios */
+.testimonials-section {
+    padding: 3rem 1.5rem;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.testimonials-section h2 {
+    font-size: 2rem;
+    color: #4caf50;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.testimonials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    max-width: 300px;
+    text-align: left;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-card::before {
+    content: "“";
+    font-size: 3rem;
+    color: #4caf50;
+    position: absolute;
+    top: -10px;
+    left: 20px;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: #4caf50;
+    font-size: 0.9rem;
+    text-align: right;
+}
+/* Sección de Cómo Funciona */
+.how-it-works-section {
+    padding: 3rem 1.5rem;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.how-it-works-section h2 {
+    font-size: 2rem;
+    color: #4caf50;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.step {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1 1 300px;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.step-number {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 1.5rem;
+    line-height: 50px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.step h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.step p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .steps {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .step {
+        max-width: 100%;
+    }
+}

@@ -15,6 +15,9 @@
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="styles/styles.css">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
     <!-- Firebase desde la CDN -->
 <!-- Firebase desde la CDN (sin módulos) -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -36,10 +39,17 @@
             </div>
             <nav>
                 <ul class="nav-list">
+                    
                     <li><a href="#home">Inicio</a></li>
-                    <li><a href="#map">Map</a></li>
-                    <li><a href="#services">Consultas</a></li>
-                    <li><a href="#chat">Chat</a></li>
+
+                    <li><a href="#map"><a href="map.html">map</a></li>
+
+                    <li><a href="#services"><a href="dana.html">iniciativa dana</a></li>
+
+                    <li><a href="#chat"><a href="Chat.html">Comunidad</a></li>
+
+                    <li><a href="#escribe"><a href="escribe.html">Quienes somos</a></li>
+
                 </ul>
                 <div class="button-container">
                     <button type="button" class="open-popup-button login-button" aria-label="Iniciar sesión" onclick="openPopup('login')">Iniciar Sesión</button>
@@ -52,162 +62,84 @@
         </div>
     </header>
 
-    <div id="legal-banner" class="legal-banner">
-        <p>
-            Al utilizar esta plataforma, aceptas que eres el único responsable del contenido que publicas. Consulta nuestras 
-            <a href="politica-privacidad.html">Políticas de Privacidad</a> y 
-            <a href="politica-cookies.html">Política de Cookies</a> para más detalles.
-        </p>
-    </div>
-
-    <section id="youtube-section">
-        <h2>Unidos para Ayudar: Empatía Laboral y la Recuperación tras la DANA</h2>
-        <div id="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/vcEtmLBbLgk" 
-    title="YouTube video player" frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
-
-        </div>
-        <p>
-            Este video presenta una iniciativa especial de <strong>Empatía Laboral</strong> para apoyar a personas y negocios afectados por la DANA. 
-            En él, te mostramos cómo añadir tu negocio o proyecto en nuestra web, incluir un enlace a tu plataforma de <strong>Twitch</strong> o <strong>YouTube</strong>, y generar ingresos mediante la monetización de tus vídeos.
-        </p>
-        <h3>Enlaces útiles</h3>
-        <ul>
-            <li><a href="https://www.youtube.com/watch?v=tlqQU4qd97A" target="_blank">Cómo crear una cuenta en Twitch y generar ingresos</a></li>
-            <li><a href="https://www.youtube.com/watch?v=O55C3Pzsww0" target="_blank">Cómo monetizar tus videos en YouTube</a></li>
-            <li><a href="https://www.youtube.com/watch?v=vcEtmLBbLgk" target="_blank">Video tutorial</a></li>
-
-        </ul>
-        <p>
-            Si no tienes tiempo para crear y subir contenido, podemos proporcionarte un <strong>video en bucle</strong> que solo necesitas mantener abierto para que los usuarios puedan apoyarte con sus visualizaciones.
-        </p>
-        <a href="GuiaGeneralpasoapaso.html">guia con ejemplo twitch</a> 
-    </section>
-    
     
 
-    <div id="home">
-        <h1>Empatía Laboral: Reseñas de Empresas Justas</h1>
-        <p>Descubre las mejores empresas valoradas por su <strong>trato justo a los empleados</strong> y su compromiso con la equidad laboral.</p>
-        <p>Encuentra <strong>reseñas confiables</strong>, comparte tus experiencias y ayuda a construir un entorno laboral más justo para todos.</p>
-        <p>Únete a nuestra comunidad y consulta información detallada sobre empresas destacadas por su <strong>transparencia y honestidad</strong>.</p>
-        
-    </div>
-
-    <div id="main-container">
-
-        <section id="reviews">
-        </section>
-
-        <section id="map">
-            <h2>Map De empresas</h2>
-
-
-
-
-        </section>
-
-       <!-- Menu de selección de sector -->
-    <div id="sectorMenu" style="display:none;">
-        <h3>Filtros de Búsqueda</h3>
-        <label for="sectorSelect">Selecciona el sector:</label>
-        <select id="sectorSelect" multiple>
-            <option value="Tecnología">Tecnología</option>
-            <option value="Tienda">Tienda</option>
-            <option value="Educación">Educación</option>
-            <option value="Salud">Salud</option>
-            <option value="Construcción">Construcción</option>
-            <option value="Finanzas">Finanzas</option>
-            <option value="Deportes">Deportes</option>
-            <option value="Turismo">Turismo</option>
-            <option value="Otros">Otros</option>
-        </select>
-        <br>
-        <label for="valoracionMin">Valoración Mínima:</label>
-        <input type="number" id="valoracionMin" min="1" max="5" placeholder="1 - 5">
-        <br>
-        <button id="aplicarFiltros">Aplicar Filtros</button>
-        <button id="restablecerFiltros">Restablecer Filtros</button>
-        <button id="seleccionarTodosSectores">Seleccionar Todos los Sectores</button>
-    </div>
-    <script src="scripts/filtros.js" defer></script>
-
-        
-
-    <section id="buscar">
-        <h2>Buscador</h2>
-        <div id="buscar-direccion-container">
-            <input type="text" id="buscar-direccion" placeholder="Buscar dirección...">
-            <button id="buscar-btn">Buscar</button>
-        </div>
-        <section id="add-company-form">
-            <h2>Añadir Empresa</h2>
-            <form id="company-form">
-                <label for="company-name">Nombre de la Empresa:</label>
-                <input type="text" id="company-name" required placeholder="Introduce el nombre de la empresa">
-    
-                <label for="sectorSelectAddCompany">Sector Laboral:</label>
-                <select id="sectorSelectAddCompany" required>
-                    <option value="" disabled selected>Selecciona un sector</option>
-                    <option value="Tecnología">Tecnología</option>
-                    <option value="Tienda">Tienda</option>
-                    <option value="Educación">Educación</option>
-                    <option value="Salud">Salud</option>
-                    <option value="Construcción">Construcción</option>
-                    <option value="Finanzas">Finanzas</option>
-                    <option value="Deportes">Deportes</option>
-                    <option value="Turismo">Turismo</option>
-                    <option value="Otros">Otros</option>
-                </select>
-    
-                <label for="company-address">Dirección:</label>
-                <input type="text" id="company-address" placeholder="Opcional si proporciona latitud y longitud">
-    
-                <label for="company-lat">Latitud:</label>
-                <input type="number" id="company-lat" step="any" placeholder="Ej. 37.7749">
-    
-                <label for="company-lng">Longitud:</label>
-                <input type="number" id="company-lng" step="any" placeholder="Ej. -122.4194">
-    
-                <button type="submit">Añadir Empresa</button>
-            </form>
-            <div id="company-message"></div>
-        </section>
-    </section>
-    
-    <!-- Sección Servicios -->
-    <section id="services">
-        <!-- Mantener vacía pero con estructura -->
-    </section>
-    
-
-
-        <section id="chat">
-            <h2 id="chat-title">Chat en Vivo</h2>
-            <div id="chat-container">
-                <div id="chat-box">
-                    <div id="messages">
-                        <!-- Mensajes del chat -->
-                    </div>
-                    <input type="text" id="message-input" placeholder="Escribe tu mensaje..."
-                        aria-label="Entrada de mensaje para el chat">
-                    <button id="send-button" aria-label="Enviar mensaje del chat">Enviar</button>
-                </div>
-                <div id="online-users-container">
-                    <h3>Usuarios Conectados:</h3>
-                    <ul id="online-users"></ul>
-                    <p id="online-users-count">Usuarios conectados: 0</p>
-                </div>
+    <div id="home" class="hero-section">
+        <div class="hero-text">
+            <h1>Construyendo un Mundo Laboral Más Justo y Transparente</h1>
+            <p>Descubre las empresas que realmente valoran a sus empleados. Nuestra plataforma te conecta con empleadores comprometidos con la justicia laboral
+                 y te permite compartir y consultar reseñas auténticas. Únete a una comunidad dedicada a impulsar la equidad, la transparencia y la confianza en
+                  el entorno laboral.</p>
+            <div class="cta-buttons">
+                <a href="map.html" class="btn-primary">Explora el Mapa</a>
+                <a href="Chat.html" class="btn-secondary">Únete a la Comunidad</a>
             </div>
-            <script src="scripts/chat.js" type="module"></script>
-
-        </section>
-
-
+        </div>
+        <div class="hero-image">
+            <img src="images/hero-banner.webp" alt="Trabajo en equipo" />
+        </div>
     </div>
+    
+
+    <section id="features" class="features-section">
+        <h2>¿Qué Ofrecemos?</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <img src="images/icon-reviews.webp" alt="Reseñas confiables">
+                <h3>Reseñas Confiables: Tu Guía Hacia Empresas de Confianza </h3>
+                <p>Explora opiniones (verificacion de opiniones en desarrollo) de empleados reales sobre empresas de todos los sectores.
+                     Descubre quiénes promueven un entorno laboral justo y toma decisiones informadas basadas en experiencias auténticas.</p>
+            </div>
+            <div class="feature">
+                <img src="images/icon-map.webp" alt="Mapa interactivo">
+                <h3>Mapa Interactivo: Descubre Empresas Comprometidas Cerca de Ti</h3>
+                <p>Navega por nuestro mapa intuitivo y localiza empresas en tu área.
+                     Descubre su nivel de compromiso con la transparencia laboral y toma decisiones informadas para tu próximo paso profesional.</p>
+            </div>
+            <div class="feature">
+                <img src="images/icon-community.webp" alt="Comunidad">
+                <h3>Comunidad Activa: Construyendo Juntos un Mercado Laboral Justo</h3>
+                <p>Forma parte de una red dinámica de usuarios que comparten tus valores. 
+                    Conecta, participa y contribuye al cambio, ayudando a construir un entorno laboral basado en la transparencia y la equidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works-section">
+        <h2>¿Cómo Funciona?</h2>
+        <div class="steps">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Regístrate Gratis</h3>
+                <p>Crea tu cuenta y accede a todas las funcionalidades.</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Explora Empresas</h3>
+                <p>Usa el mapa interactivo para buscar empresas según tu interés.</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Comparte Tu Experiencia</h3>
+                <p>Publica tus reseñas y ayuda a otros usuarios a tomar decisiones informadas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <h2>Opiniones de Usuarios</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Gracias a Empatía Laboral, encontré una empresa que valora a sus empleados. ¡Recomendado!"</p>
+                <p class="testimonial-author">– María López</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"La transparencia de las reseñas me permitió evitar un mal empleador. ¡Gran herramienta!"</p>
+                <p class="testimonial-author">– Carlos Martínez</p>
+            </div>
+        </div>
+    </section>
+    
 
     <div id="cookie-banner" class="cookie-banner hidden">
         <div class="cookie-banner-content">
@@ -227,7 +159,7 @@
     <footer id="footer">
         <p>Esta página web está en constante desarrollo y mejora.
             Si tienes alguna sugerencia para ayudarnos a crecer y mejorar,
-            no dudes en enviarnos un correo a lalalalalal. ¡Nos encantaría escuchar tus ideas y comentarios!</p>
+            no dudes en enviarnos un correo a empatialaboralayuda@gmail.com. ¡Nos encantaría escuchar tus ideas y comentarios!</p>
         <div class="contact-container">
             <div class="contact-info">
                 <h3>Contacto</h3>
@@ -236,27 +168,26 @@
             </div>
             <div class="share-container">
                 <p>Compartir en redes sociales</p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-url.com" target="_blank">
-                    <img src="images/facebook-icon.png" alt="Facebook" class="social-logo" loading="lazy">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-url.com" target="_blank" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://twitter.com/intent/tweet?url=https://tu-url.com&text=¡Echa un vistazo a esta web!"
-                    target="_blank">
-                    <img src="images/twitter-icon.png" alt="Twitter" class="social-logo">
+                <a href="https://twitter.com/intent/tweet?url=https://tu-url.com&text=¡Echa un vistazo a esta web!" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
                 </a>
-                <a href="https://www.instagram.com" target="_blank">
-                    <img src="images/instagram-icon.png" alt="Instagram" class="social-logo">
+                <a href="https://www.instagram.com" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tu-url.com" target="_blank">
-                    <img src="images/linkedin-icon.png" alt="LinkedIn" class="social-logo">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tu-url.com" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://wa.me/?text=¡Echa un vistazo a esta web! https://tu-url.com" target="_blank">
-                    <img src="images/whatsapp-icon.png" alt="WhatsApp" class="social-logo">
+                <a href="https://wa.me/?text=¡Echa un vistazo a esta web! https://tu-url.com" target="_blank" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
                 </a>
-                <a href="https://www.youtube.com/channel/TU_CANAL" target="_blank">
-                    <img src="images/youtube-icon.png" alt="YouTube" class="social-logo">
+                <a href="https://www.youtube.com/channel/TU_CANAL" target="_blank" class="social-link">
+                    <i class="fab fa-youtube"></i>
                 </a>
-
             </div>
+            
         </div>
     </footer>
 
@@ -316,9 +247,19 @@
     </script>
     <script src="scripts/cookies.js" defer></script>
     <script async src="//code.tidio.co/jjwaksgq9v6pk1z22mycnx4gw878efvy.js"></script>
+    <div id="legal-banner" class="legal-banner">
+        <p>
+            Al utilizar esta plataforma, aceptas que eres el único responsable del contenido que publicas. Consulta nuestras 
+            <a href="politica-privacidad.html">Políticas de Privacidad</a> y 
+            <a href="politica-cookies.html">Política de Cookies</a> para más detalles.
+        </p>
+    </div>
+
+    
 
 
     
 </body>
 
 </html>
+

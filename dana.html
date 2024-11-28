@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Empatía Laboral: Encuentra reseñas confiables sobre empresas con trato justo a sus empleados. Comparte tus experiencias y ayuda a construir un mundo laboral más justo.">
+        <title>Empatía Laboral</title>
+    
+        <!-- CSS de Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <!-- CSS de Leaflet.AwesomeMarkers -->
+        <link rel="stylesheet" href="styles/leaflet.awesome-markers.css">
+        <!-- CSS de Font Awesome para iconos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- CSS personalizado -->
+        <link rel="stylesheet" href="styles/styles.css">
+    
+        <!-- Firebase desde la CDN -->
+    <!-- Firebase desde la CDN (sin módulos) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    
+    <!-- Archivo de configuración de Firebase -->
+    <script src="scripts/firebaseConfig.js"></script>
+    
+    </head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-title-container">
+                <img src="logo.png" alt="Logo de la Empresa" class="logo" loading="lazy">
+                <h1 class="site-title">EMPATIA LABORAL</h1>
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#home"><a href="index.html">Inicio</a></li>
+                    <li><a href="#map"><a href="map.html">map</a></li>
+                    <li><a href="#services"><a href="dana.html">iniciativa dana</a></li>
+                    <li><a href="#chat"><a href="Chat.html">Comunidad</a></li>
+                    <li><a href="#escribe"><a href="escribe.html">Quienes somos</a></li>
+
+                </ul>
+                <div class="button-container">
+                    <button type="button" class="open-popup-button login-button" aria-label="Iniciar sesión" onclick="openPopup('login')">Iniciar Sesión</button>
+                    <div id="success-message" aria-live="polite">¡Operación realizada con éxito!</div>
+                    <button type="button" class="open-popup-button register-button" aria-label="Registrarse" onclick="openPopup('register')">Registrarse</button>
+                    <button type="button" class="logout-button" aria-label="Cerrar sesión" onclick="logout()">Cerrar Sesión</button>
+                </div>
+                
+            </nav>
+        </div>
+    </header>
+    <main>
+
+
+        <section id="youtube-section">
+            <h2>Unidos para Ayudar: Empatía Laboral y la Recuperación tras la DANA</h2>
+            <div id="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/vcEtmLBbLgk" 
+        title="YouTube video player" frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+    
+            </div>
+            <p>
+                Este video presenta una iniciativa especial de <strong>Empatía Laboral</strong> para apoyar a personas y negocios afectados por la DANA. 
+                En él, te mostramos cómo añadir tu negocio o proyecto en nuestra web, incluir un enlace a tu plataforma de <strong>Twitch</strong> o <strong>YouTube</strong>, y generar ingresos mediante la monetización de tus vídeos.
+            </p>
+            <h3>Enlaces útiles</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=tlqQU4qd97A" target="_blank">Cómo crear una cuenta en Twitch y generar ingresos</a></li>
+                <li><a href="https://www.youtube.com/watch?v=O55C3Pzsww0" target="_blank">Cómo monetizar tus videos en YouTube</a></li>
+                <li><a href="https://www.youtube.com/watch?v=vcEtmLBbLgk" target="_blank">Video tutorial</a></li>
+    
+            </ul>
+            <p>
+                Si no tienes tiempo para crear y subir contenido, podemos proporcionarte un <strong>video en bucle</strong> que solo necesitas mantener abierto para que los usuarios puedan apoyarte con sus visualizaciones.
+            </p>
+            <a href="GuiaGeneralpasoapaso.html">guia con ejemplo twitch</a> 
+        </section>
+        
+    
+
+
+
+            <!-- Sección Servicios -->
+    <section id="services">
+        <!-- Mantener vacía pero con estructura -->
+    </section>
+
+
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <div class="cookie-banner-content">
+          <h3>Configuración de Cookies</h3>
+          <p>Usamos cookies para mejorar tu experiencia en nuestra web. Puedes aceptar todas, rechazarlas o personalizar tus preferencias.</p>
+          <div class="cookie-buttons">
+            <button id="accept-cookies" class="cookie-btn accept">Aceptar todas</button>
+            <button id="reject-cookies" class="cookie-btn reject">Rechazar todas</button>
+            <button id="customize-cookies" class="cookie-btn customize">Personalizar</button>
+          </div>
+          <a href="politica-cookies.html" class="cookie-link">Más información</a>
+        </div>
+      </div>
+      
+      
+
+    <footer id="footer">
+        <p>Esta página web está en constante desarrollo y mejora.
+            Si tienes alguna sugerencia para ayudarnos a crecer y mejorar,
+            no dudes en enviarnos un correo a empatialaboralayuda@gmail.com. ¡Nos encantaría escuchar tus ideas y comentarios!</p>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contacto</h3>
+                <p>Email:empatialaboralayuda@gmail.com</p>
+                <p>Teléfono: +123 456 7890</p>
+            </div>
+            <div class="share-container">
+                <p>Compartir en redes sociales</p>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-url.com" target="_blank">
+                    <img src="images/facebook-icon.png" alt="Facebook" class="social-logo" loading="lazy">
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://tu-url.com&text=¡Echa un vistazo a esta web!"
+                    target="_blank">
+                    <img src="images/twitter-icon.png" alt="Twitter" class="social-logo">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="images/instagram-icon.png" alt="Instagram" class="social-logo">
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tu-url.com" target="_blank">
+                    <img src="images/linkedin-icon.png" alt="LinkedIn" class="social-logo">
+                </a>
+                <a href="https://wa.me/?text=¡Echa un vistazo a esta web! https://tu-url.com" target="_blank">
+                    <img src="images/whatsapp-icon.png" alt="WhatsApp" class="social-logo">
+                </a>
+                <a href="https://www.youtube.com/channel/TU_CANAL" target="_blank">
+                    <img src="images/youtube-icon.png" alt="YouTube" class="social-logo">
+                </a>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Popups de autenticación y login -->
+    <div id="auth-popup" class="popup" aria-hidden="true">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()" tabindex="0" aria-label="Cerrar popup">&times;</span>
+            <h2 id="popup-title"></h2>
+            <form id="popup-form" aria-live="assertive">
+                <div id="password-suggestions" style="color: red; margin-top: 5px;"></div>
+                <div>
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Recordarme</label>
+                </div>
+                <input type="text" id="login-email" autocomplete="email">
+                <input type="password" id="login-password" autocomplete="current-password">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Elemento loader -->
+    <div id="loader" aria-live="polite">Cargando...</div>
+    <div id="success-message" aria-live="polite">¡Éxito!</div>
+
+    <!-- Scripts de Leaflet y AwesomeMarkers -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" defer></script>
+    <script src="scripts/leaflet.awesome-markers.js" defer></script> <!-- Asegurarse de que esta ruta es correcta -->
+
+    <!-- Scripts personalizados -->
+    <script src="scripts/reseñas.js" defer></script>
+    <script src="scripts/map.js" defer></script>
+    <script src="scripts/addCompany.js" defer></script>
+
+    <script src="scripts/buscador.js" defer></script>
+    <script src="scripts/authFunctions.js" type="module"></script>
+    <script src="scripts/validation.js" type="module"></script>
+    <script src="scripts/passwordUtils.js" type="module"></script>
+    <script src="scripts/infoButton.js" defer></script>
+    <script src="scripts/footer.js" defer></script>
+    <script>
+        function openPopup(type) {
+            const popup = document.getElementById('auth-popup');
+            const title = document.getElementById('popup-title');
+            const form = document.getElementById('popup-form');
+            popup.style.display = 'block';
+            popup.setAttribute('aria-hidden', 'false');
+            title.textContent = type === 'login' ? 'Iniciar Sesión' : 'Registrarse';
+            form.focus();
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('auth-popup');
+            popup.style.display = 'none';
+            popup.setAttribute('aria-hidden', 'true');
+        }
+    </script>
+    <script src="scripts/cookies.js" defer></script>
+    <script async src="//code.tidio.co/jjwaksgq9v6pk1z22mycnx4gw878efvy.js"></script>
+    <div id="legal-banner" class="legal-banner">
+        <p>
+            Al utilizar esta plataforma, aceptas que eres el único responsable del contenido que publicas. Consulta nuestras 
+            <a href="politica-privacidad.html">Políticas de Privacidad</a> y 
+            <a href="politica-cookies.html">Política de Cookies</a> para más detalles.
+        </p>
+    </div>
+
+
+    
+</body>
+</html>
