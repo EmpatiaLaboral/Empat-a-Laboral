@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     transition: transform 0.4s;
 }
 
@@ -15,8 +15,10 @@
     position: relative;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 0.3rem;
-    max-width: 12.5rem;
+    max-width: 10rem;
     margin: 0 1.5rem 0 2rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
     transition: box-shadow 0.4s, transform 0.4s;
     overflow: hidden;
@@ -55,31 +57,6 @@
 }
 
 
-
-
-nav a:hover {
-    color: #ffd700;
-    transform: translateY(-3px) scale(1.05);
-    letter-spacing: 1px;
-}
-
-nav a::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #ffd700;
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    transition: width 0.4s, transform 0.4s;
-}
-
-nav a:hover::after {
-    width: 100%;
-    transform: scaleX(1.1);
-}
-
 nav a:active {
     transform: scale(0.93);
     color: #ffb700;
@@ -87,7 +64,8 @@ nav a:active {
 
 /* Título del sitio */
 .site-title {
-    margin: 0;
+    margin: 0rem;
+    margin-left: 0rem;
     font-size: 4rem;
     font-weight: 800;
     color: hsl(115, 74%, 24%);
@@ -105,11 +83,15 @@ nav a:active {
 .nav-list {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0rem;
     display: flex;
-    gap: 1.5rem;
+    gap: 1.9rem;
     margin-left: 1rem;
     margin-bottom: 1rem;
+    height: 4rem;
+    font-size: 1.5rem;
+
+
 }
 
 .nav-list li {
@@ -292,6 +274,9 @@ body {
     background-color: #f4f5f5;
     overflow-x: hidden;
     position: relative;
+    margin: 1rem;
+    padding: 1rem; /* Espaciado interno uniforme */
+
 }
 
 body::before {
@@ -308,7 +293,7 @@ body::before {
 
 /* Contenedor principal */
 #main-container {
-    display: grid;
+    display: colu;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
 }
@@ -339,8 +324,6 @@ body::before {
 
 
 
-/* Contenedor del mapa ajustado */
-
 
 
 
@@ -353,8 +336,8 @@ body::before {
 
 /* Título del chat */
 #chat-title {
-    font-size: 1.75rem;
-    color: #fff;
+    font-size: 3.75rem;
+    color: #ffffff;
     margin-bottom: 1rem;
     padding-left: 0.75rem;
     text-align: left;
@@ -363,11 +346,11 @@ body::before {
 
 /* Contenedor del chat */
 #chat-container {
-    height: 40rem;
+    height: 50rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 25rem;
+    max-width: 50rem;
     padding: 1rem;
     background: linear-gradient(135deg, #046b00, #0a8c36);
     border-radius: 1rem;
@@ -387,17 +370,17 @@ body::before {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: #f0ecec;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
 }
 
 /* Usuarios en línea */
 #online-users-container {
-    margin-top: 1rem;
+    margin-top: 0rem;
     padding: 0.75rem;
     border: 1px solid rgba(248, 247, 247, 0.5);
     border-radius: 0.5rem;
     background-color: rgba(239, 245, 240, 0.6);
-    height: 90px;
+    height: 230px;
     /* Establece una altura fija */
     overflow-y: auto;
     /* Agrega la barra de desplazamiento vertical */
@@ -431,7 +414,7 @@ body::before {
 #online-users-count {
     font-weight: bold;
     margin-top: 1rem;
-    color: #333;
+    color: #ffffff;
 }
 
 /* Indicador de escritura */
@@ -457,14 +440,7 @@ body::before {
     margin-bottom: 0.3rem;
 }
 
-.bot-message {
-    color: #007bff;
-    background-color: rgba(247, 237, 96, 0.8);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-}
+
 
 .error-message {
     color: #ff0000;
@@ -525,12 +501,12 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    background: linear-gradient(135deg, #aa8405, #aa8405);
+    width: 93%;
+    background: linear-gradient(135deg, #0f0f0f00, #00000000);
     text-align: center;
     padding: 1rem 2rem;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 2%;
+    margin-top: 4%;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: #333;
     font-size: 1rem;
@@ -594,7 +570,7 @@ body::before {
 
 /* Campo de búsqueda */
 #buscar {
-    width: 70%;
+    width: 87%;
     background: linear-gradient(135deg, rgba(4, 122, 0, 0.8), rgba(34, 139, 34, 0.7));
     color: #020202;
     border: 1px solid #007bff;
@@ -602,8 +578,8 @@ body::before {
     padding: 0.75rem 1rem;
     font-size: 1rem;
     transition: background-color 0.3s, border-color 0.3s;
-    right: -8.5rem;
-    position: relative;
+    margin: 3rem;   
+     position: relative;
 }
 
 #buscar:focus {
@@ -637,8 +613,8 @@ body::before {
 
 /* Contenedor de reseñas */
 #reviews {
-    max-width: 400px;
-    margin: 2px;
+    max-width: 855px;
+    margin: 50px;
     padding: 20px;
     background: linear-gradient(135deg, rgba(4, 122, 0, 0.8), rgba(34, 139, 34, 0.7));
     border-radius: 10px;
@@ -656,15 +632,10 @@ body::before {
     margin-bottom: 15px;
 }
 
-/* Cada reseña */
-
-/* Separador entre reseñas */
-
-/* Puntuación con estrellas */
-
 /* Formulario de reseñas */
 #form-agregar-resena {
     margin-top: 0;
+    margin-right: 1rem;
 }
 
 #form-agregar-resena label {
@@ -710,7 +681,7 @@ body::before {
 
 .estrella {
     font-size: 2.0rem;
-    color: #eeff00;
+    color: #d6d30e;
     cursor: pointer;
     transition: color 0.3s, transform 0.2s;
 }
@@ -1115,32 +1086,48 @@ details p {
     display: none;
     color: green;
 }
-/* Mapa general */
-#map-container {
-    width: 100%!important;
-    height: 500px!important;
-    margin: 1rem 0!important;
-    border: 1px solid #ccc!important;
-    border-radius: 10px!important;
-    overflow: hidden!important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)!important;
+/* Estilo general del mapa */
+#map {
+    width: 90%; /* Ocupa todo el ancho del contenedor */
+    height: 800px; /* Altura predeterminada para pantallas grandes */
+    margin: 3rem;
+    border-radius: 10px; /* Bordes redondeados para un estilo moderno */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para un efecto profesional */
+    overflow: hidden;
 }
 
-/* Ajuste para dispositivos móviles */
-@media only screen and (max-width: 768px) {
-    #map-container {
-        width: 90%!important; /* Ajustar al 90% del ancho del viewport */ 
-        height: 300px!important; /* Reducir la altura para que se vea completo */
-        margin: 0 auto!important; /* Centrar el mapa */
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    #map {
+        height: 300px; /* Altura ajustada para pantallas más pequeñas */
     }
-    
-    #buscar, #add-company-form {
-        width: 90%!important; /* Ajustar formularios al ancho del móvil */
-        margin: 1rem auto!important;
+}
+
+@media (max-width: 480px) {
+    #map {
+        height: 250px; /* Altura optimizada para móviles */
+        margin: 10px; /* Separación en móviles */
     }
-    
-    #sectorMenu {
-        width: 90%!important; /* Ajuste para filtros */
-        margin: 1rem auto!important;
-    }
+}
+
+/* Botones de Leaflet */
+.leaflet-container .leaflet-control-zoom-in,
+.leaflet-container .leaflet-control-zoom-out {
+    background-color: #0563bb; /* Color acorde al diseño */
+    color: white;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.leaflet-container .leaflet-control-zoom-in:hover,
+.leaflet-container .leaflet-control-zoom-out:hover {
+    background-color: #00bcd4; /* Efecto hover */
+}
+
+/* Mejoras en los controles de capas */
+.leaflet-control-layers {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
