@@ -341,25 +341,7 @@ body::before {
 
 /* Contenedor del mapa ajustado */
 
-#map {
-    width: calc(125% - 1rem);
-    /* Deja solo 0.5rem de margen a cada lado */
-    max-width: 100x;
-    /* Aumenta el ancho máximo */
-    height: 40rem;
-    margin: 0.5rem auto;
-    /* Margen superior e inferior de 0.5rem */
-    border: 0.15rem solid rgba(163, 232, 181, 0.8);
-    border-radius: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transition: transform 0.4s, box-shadow 0.4s;
-    margin-left: -5.0rem;
-}
 
-#map:hover::before {
-    opacity: 1;
-}
 
 
 /* Sección de chat */
@@ -984,7 +966,7 @@ details p {
 #map .fa-search {
     position: absolute;
     top: 15px;
-    right: 375px;
+    right: 275px;
     font-size: 1.5em;
     z-index: 1001;
 }
@@ -1132,4 +1114,33 @@ details p {
 #success-message {
     display: none;
     color: green;
+}
+/* Mapa general */
+#map-container {
+    width: 100%!important;
+    height: 500px!important;
+    margin: 1rem 0!important;
+    border: 1px solid #ccc!important;
+    border-radius: 10px!important;
+    overflow: hidden!important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)!important;
+}
+
+/* Ajuste para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+    #map-container {
+        width: 90%!important; /* Ajustar al 90% del ancho del viewport */ 
+        height: 300px!important; /* Reducir la altura para que se vea completo */
+        margin: 0 auto!important; /* Centrar el mapa */
+    }
+    
+    #buscar, #add-company-form {
+        width: 90%!important; /* Ajustar formularios al ancho del móvil */
+        margin: 1rem auto!important;
+    }
+    
+    #sectorMenu {
+        width: 90%!important; /* Ajuste para filtros */
+        margin: 1rem auto!important;
+    }
 }
