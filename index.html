@@ -31,25 +31,20 @@
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <div class="header-container">
             <div class="logo-title-container">
                 <img src="logo.png" alt="Logo de la Empresa" class="logo" loading="lazy">
                 <h1 class="site-title">EMPATIA LABORAL</h1>
+                <button class="mobile-menu-toggle" aria-label="Abrir menú de navegación" onclick="toggleMenu()">☰</button>
             </div>
             <nav>
                 <ul class="nav-list">
-                    
                     <li><a href="#home">Inicio</a></li>
-
-                    <li><a href="#map"><a href="map.html">map</a></li>
-
-                    <li><a href="#services"><a href="dana.html">iniciativa dana</a></li>
-
-                    <li><a href="#chat"><a href="Chat.html">Comunidad</a></li>
-
-                    <li><a href="#escribe"><a href="escribe.html">Quienes somos</a></li>
-
+                    <li><a href="map.html">Mapa</a></li>
+                    <li><a href="dana.html">Iniciativa Dana</a></li>
+                    <li><a href="Chat.html">Comunidad</a></li>
+                    <li><a href="escribe.html">Quiénes Somos</a></li>
                 </ul>
                 <div class="button-container">
                     <button type="button" class="open-popup-button login-button" aria-label="Iniciar sesión" onclick="openPopup('login')">Iniciar Sesión</button>
@@ -57,10 +52,11 @@
                     <button type="button" class="open-popup-button register-button" aria-label="Registrarse" onclick="openPopup('register')">Registrarse</button>
                     <button type="button" class="logout-button" aria-label="Cerrar sesión" onclick="logout()">Cerrar Sesión</button>
                 </div>
-                
             </nav>
         </div>
     </header>
+    
+    
 
     
 
@@ -147,15 +143,9 @@
     <footer id="footer">
         <p>Esta página web está en constante desarrollo y mejora.
             Si tienes alguna sugerencia para ayudarnos a crecer y mejorar,
-            no dudes en enviarnos un correo a empatialaboralayuda@gmail.com. ¡Nos encantaría escuchar tus ideas y comentarios!</p>
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Contacto</h3>
-                <p>Email:empatialaboralayuda@gmail.com</p>
-                <p>Teléfono: +123 456 7890</p>
-            </div>
-            <div class="share-container">
-                <p>Compartir en redes sociales</p>
+            no dudes en enviarnos un correo a empatialaboralayuda@gmail.com. 
+            ¡Nos encantaría escuchar tus ideas y comentarios!
+            Compartir en redes sociales</p>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-url.com" target="_blank" class="social-link">
                     <i class="fab fa-facebook-f"></i>
                 </a>
@@ -174,9 +164,7 @@
                 <a href="https://www.youtube.com/channel/TU_CANAL" target="_blank" class="social-link">
                     <i class="fab fa-youtube"></i>
                 </a>
-            </div>
-            
-        </div>
+       
     </footer>
 
     <!-- Popups de autenticación y login -->
@@ -243,10 +231,8 @@
         </p>
     </div>
 
-    
 
 
-    
 </body>
 
 </html>

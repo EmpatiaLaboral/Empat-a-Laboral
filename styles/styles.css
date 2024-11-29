@@ -1,29 +1,3 @@
-/* Botón de acción */
-header button {
-    background-color: #684e1f;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
-    position: relative;
-    overflow: hidden;
-}
-
-
-/* Contenedor de encabezado */
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 3rem;
-    position: relative;
-    z-index: 2;
-    backdrop-filter: blur(10px);
-}
 
 /* Contenedor del logo y título */
 .logo-title-container {
