@@ -1,73 +1,72 @@
 [
-    {
-      "nombre": "Hospital Universitario del Tajo",
-      "direccion": "Calle de Severo Ochoa, s/n, 28300 Aranjuez, Madrid",
-      "lat": 40.0376,
-      "lng": -3.6123,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Clínica Nuestra Señora de Loreto",
-      "direccion": "Calle del Príncipe de Vergara, 67, 28006 Madrid",
-      "lat": 40.4302,
-      "lng": -3.6774,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Hospital Universitario Infanta Cristina",
-      "direccion": "Avenida de los Reyes Católicos, 21, 28935 Móstoles, Madrid",
-      "lat": 40.3333,
-      "lng": -3.8711,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Hospital Universitario Fundación Alcorcón",
-      "direccion": "Calle Budapest, 1, 28922 Alcorcón, Madrid",
-      "lat": 40.3456,
-      "lng": -3.8289,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Clínica Quirón Pozuelo",
-      "direccion": "Camino de las Huertas, 15, 28224 Pozuelo de Alarcón, Madrid",
-      "lat": 40.4370,
-      "lng": -3.8128,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Hospital Vithas Madrid Arturo Soria",
-      "direccion": "Calle de Arturo Soria, 103, 28043 Madrid",
-      "lat": 40.4522,
-      "lng": -3.6571,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Hospital Virgen de la Paloma",
-      "direccion": "Calle de Eduardo Dato, 2, 28010 Madrid",
-      "lat": 40.4346,
-      "lng": -3.7008,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Clínica Retiro",
-      "direccion": "Calle de Lope de Rueda, 35, 28009 Madrid",
-      "lat": 40.4169,
-      "lng": -3.6780,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Hospital Universitario HM Montepríncipe",
-      "direccion": "Avenida de Montepríncipe, 25, 28660 Boadilla del Monte, Madrid",
-      "lat": 40.4017,
-      "lng": -3.8399,
-      "sector": "Salud"
-    },
-    {
-      "nombre": "Clínica Centro Médico Castellana",
-      "direccion": "Paseo de la Castellana, 188, 28046 Madrid",
-      "lat": 40.4626,
-      "lng": -3.6899,
-      "sector": "Salud"
-    }
-  ]
-  
+  {
+    "nombre": "Nevadensis",
+    "direccion": "Calle Real, 14, 18412 Bubión, Granada, España",
+    "lat": 36.9516,
+    "lng": -3.3578,
+    "sector": "Turismo Activo"
+  },
+  {
+    "nombre": "Autocares Tocina",
+    "direccion": "Calle Luis Crovetto Martínez, 1, Pol. Industrial Juncaril, 18220 Albolote, Granada, España",
+    "lat": 37.2302,
+    "lng": -3.6550,
+    "sector": "Transporte de Pasajeros"
+  },
+  {
+    "nombre": "Cetursa Sierra Nevada S.A.",
+    "direccion": "Plaza de Andalucía, 4, 18196 Sierra Nevada, Granada, España",
+    "lat": 37.0938,
+    "lng": -3.3985,
+    "sector": "Gestión de Estación de Esquí"
+  },
+  {
+    "nombre": "Granaventour",
+    "direccion": "Calle Neptuno, 11, 18004 Granada, España",
+    "lat": 37.1765,
+    "lng": -3.6000,
+    "sector": "Deportes de Aventura"
+  },
+  {
+    "nombre": "Mamut Sierra Nevada",
+    "direccion": "Calle de la Sultana, 3, 18008 Granada, España",
+    "lat": 37.1642,
+    "lng": -3.5883,
+    "sector": "Experiencias al Aire Libre"
+  },
+  {
+    "nombre": "Aventura Cabraloca",
+    "direccion": "Avenida de la Constitución, 20, 18012 Granada, España",
+    "lat": 37.1819,
+    "lng": -3.6036,
+    "sector": "Turismo Activo"
+  },
+  {
+    "nombre": "DimTrap",
+    "direccion": "Calle San Antón, 72, 18005 Granada, España",
+    "lat": 37.1700,
+    "lng": -3.5980,
+    "sector": "Aventuras y Senderismo"
+  },
+  {
+    "nombre": "Guías Nevada",
+    "direccion": "Calle Maestro Cebrián, 1, 18003 Granada, España",
+    "lat": 37.1830,
+    "lng": -3.6000,
+    "sector": "Guías de Montaña"
+  },
+  {
+    "nombre": "Oro de Sierra Nevada Almazara Ecológica",
+    "direccion": "Paraje de la Almazara, s/n, 18413 Capileira, Granada, España",
+    "lat": 36.9610,
+    "lng": -3.3630,
+    "sector": "Agricultura Ecológica"
+  },
+  {
+    "nombre": "Cervezas Far West",
+    "direccion": "Calle Sierra Nevada, 12, 04009 Almería, España",
+    "lat": 36.8400,
+    "lng": -2.4670,
+    "sector": "Fabricación de Cerveza Artesanal"
+  }
+]

@@ -221,6 +221,18 @@
             popup.style.display = 'none';
             popup.setAttribute('aria-hidden', 'true');
         }
+
+                                                                            if ('serviceWorker' in navigator) {
+                                                                        navigator.serviceWorker.register('/service-worker.js')
+                                                                            .then(registration => {
+                                                                                console.log('Service Worker registrado:', registration);
+                                                                            })
+                                                                            .catch(error => {
+                                                                                console.log('Error al registrar el Service Worker:', error);
+                                                                            });
+                                                                    }
+
+        
     </script>
     <script src="scripts/cookies.js" defer></script>
     <script async src="//code.tidio.co/jjwaksgq9v6pk1z22mycnx4gw878efvy.js"></script>
@@ -235,6 +247,8 @@
 
 
 </body>
+
+
 
 </html>
 

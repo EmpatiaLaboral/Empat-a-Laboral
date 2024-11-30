@@ -24,14 +24,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Texto de la explicación
     const textoExplicativo = `
-        Bienvenidos a Empatía Laboral. Esta página web está diseñada para ayudarte a conocer las experiencias laborales de otros usuarios y compartir la tuya. Aquí tienes las funcionalidades principales:
-        1. Mapa de Empresas: En el mapa, puedes buscar empresas específicas y ver chinchetas de diferentes colores que representan sectores laborales, como tecnología, salud, o finanzas. Las chinchetas incluyen reseñas de usuarios sobre las empresas. Puedes hacer clic en cualquier chincheta para ver detalles y reseñas de esa empresa.
-        2. Buscador: Utiliza el cuadro de búsqueda para encontrar empresas por nombre o dirección. Los resultados se desplegarán en un cuadro sugerente, similar a Google Maps, y al seleccionar una sugerencia, el mapa centrará la vista en la empresa.
-        3. Añadir Empresa: Si estás registrado, puedes añadir una empresa proporcionando su nombre, sector laboral, y dirección. Si no tienes las coordenadas exactas, el sistema geocodificará la dirección para ubicarla automáticamente en el mapa.
-        4. Reseñas de Empresas: Al hacer clic en una empresa del mapa, se abrirá una sección de reseñas donde podrás ver comentarios y calificaciones. Si eres usuario registrado, también puedes añadir tu propia reseña con una calificación de estrellas y un comentario.
-        5. Chat en Vivo: Interactúa en el chat en vivo para compartir información y dudas en tiempo real. En la sección de usuarios conectados, verás una lista de personas online. Para enviar mensajes, necesitas estar registrado.
-        6. Consultas con Chat: En la sección de consultas, tienes un cuadro de texto donde puedes escribir preguntas sobre cómo usar la web. La IA responderá y resolverá tus dudas.
-        Si tienes dudas o sugerencias, puedes contactarnos a través del formulario de contacto en el pie de página. Empatía Laboral está en constante mejora para ofrecerte la mejor experiencia.
+        Bienvenido a Empatía Laboral
+
+Empatía Laboral es tu plataforma para descubrir y compartir experiencias laborales. Nuestro objetivo es ayudarte a tomar decisiones informadas y construir un entorno laboral más justo y transparente. Estas son las principales funcionalidades de nuestra página web:
+
+1. Mapa de Empresas
+Explora un mapa interactivo donde podrás:
+
+Buscar empresas específicas por nombre o ubicación.
+Identificar chinchetas de colores que representan distintos sectores laborales, como tecnología, salud o finanzas.
+Hacer clic en cualquier chincheta para acceder a los detalles y reseñas de esa empresa.
+2. Buscador Inteligente
+Encuentra empresas fácilmente usando nuestro buscador:
+
+Escribe el nombre o dirección de una empresa para obtener sugerencias en tiempo real.
+Al seleccionar una sugerencia, el mapa se centrará automáticamente en la ubicación de la empresa seleccionada.
+3. Añadir Empresas
+Contribuye al mapa añadiendo nuevas empresas:
+
+Requisito: Debes estar registrado para utilizar esta función.
+Proporciona el nombre de la empresa, su sector laboral y dirección.
+Si no cuentas con coordenadas exactas, nuestro sistema las generará automáticamente utilizando la dirección que proporciones.
+4. Reseñas de Empresas
+Comparte y consulta opiniones laborales:
+
+Haz clic en cualquier empresa del mapa para ver reseñas de otros usuarios.
+Si estás registrado, puedes dejar tu propia reseña con una calificación de estrellas y un comentario detallado.
+5. Chat en Vivo
+Comunícate en tiempo real con otros usuarios:
+
+Únete a conversaciones en el chat para compartir información, resolver dudas o colaborar.
+Consulta la lista de usuarios conectados en tiempo real.
+Nota: Solo los usuarios registrados pueden enviar mensajes, aunque cualquier visitante puede leer las conversaciones.
+6. Asistencia con IA
+¿Tienes preguntas sobre cómo usar la web?
+
+Ve a la sección de consultas y escribe tus dudas.
+Nuestra inteligencia artificial está preparada para ayudarte con respuestas rápidas y precisas.
+Contacto y Sugerencias
+Si tienes preguntas adicionales, comentarios o sugerencias para mejorar la web, no dudes en contactarnos a través del formulario de contacto ubicado en el pie de página.
+
+Empatía Laboral está en constante evolución para ofrecerte la mejor experiencia. ¡Gracias por formar parte de esta comunidad! 🌟
+
+Consejo:
+Explora las secciones de la web, comparte tus experiencias y contribuye a construir un entorno laboral más transparente para todos.
         Platón escribe que el verdadero navegante debe estudiar las estaciones del año, el cielo, las estrellas, los vientos y todas las demás materias propias de su profesión. Si realmente es apto para controlar la nave, piensa que es del todo imposible adquirir la destreza profesional necesaria para tal control y que no existe el arte de la navegación.
         ¿Cuánto podría saber realmente un miembro del Consejo de los 500 elegido al azar? ¿Cuánto podría aportar plenamente a la sociedad? ¿Deberíamos permitir que un miembro aleatorio de la sociedad tuviera algún poder?
         En su lugar, Platón abogaba por la idea de un rey filósofo, un hombre que estudia la sabiduría, la lógica y el razonamiento, un hombre que dedique su vida a comprender cómo ser un navegante de la sabiduría.
