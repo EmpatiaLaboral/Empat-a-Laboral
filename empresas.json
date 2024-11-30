@@ -1,72 +1,86 @@
 [
   {
-    "nombre": "Nevadensis",
-    "direccion": "Calle Real, 14, 18412 Bubión, Granada, España",
-    "lat": 36.9516,
-    "lng": -3.3578,
-    "sector": "Turismo Activo"
-  },
-  {
-    "nombre": "Autocares Tocina",
-    "direccion": "Calle Luis Crovetto Martínez, 1, Pol. Industrial Juncaril, 18220 Albolote, Granada, España",
-    "lat": 37.2302,
-    "lng": -3.6550,
-    "sector": "Transporte de Pasajeros"
-  },
-  {
-    "nombre": "Cetursa Sierra Nevada S.A.",
-    "direccion": "Plaza de Andalucía, 4, 18196 Sierra Nevada, Granada, España",
+    "nombre": "Centro de Salud de Pradollano",
+    "direccion": "Plaza de Andalucía, s/n, 18196 Sierra Nevada, Granada, España",
     "lat": 37.0938,
     "lng": -3.3985,
-    "sector": "Gestión de Estación de Esquí"
+    "sector": "Centro Médico"
   },
   {
-    "nombre": "Granaventour",
-    "direccion": "Calle Neptuno, 11, 18004 Granada, España",
-    "lat": 37.1765,
-    "lng": -3.6000,
-    "sector": "Deportes de Aventura"
+    "nombre": "Farmacia Sierra Nevada",
+    "direccion": "Plaza de Pradollano, 1, 18196 Sierra Nevada, Granada, España",
+    "lat": 37.0935,
+    "lng": -3.3987,
+    "sector": "Farmacia"
   },
   {
-    "nombre": "Mamut Sierra Nevada",
-    "direccion": "Calle de la Sultana, 3, 18008 Granada, España",
-    "lat": 37.1642,
-    "lng": -3.5883,
-    "sector": "Experiencias al Aire Libre"
+    "nombre": "La Alcaicería",
+    "direccion": "Calle Alcaicería, s/n, 18001 Granada, España",
+    "lat": 37.1760,
+    "lng": -3.5986,
+    "sector": "Tiendas de Recuerdos"
   },
   {
-    "nombre": "Aventura Cabraloca",
-    "direccion": "Avenida de la Constitución, 20, 18012 Granada, España",
-    "lat": 37.1819,
-    "lng": -3.6036,
-    "sector": "Turismo Activo"
+    "nombre": "Lavandería Pradollano",
+    "direccion": "Calle de la Virgen de las Nieves, 10, 18196 Sierra Nevada, Granada, España",
+    "lat": 37.0930,
+    "lng": -3.3980,
+    "sector": "Lavandería"
   },
   {
-    "nombre": "DimTrap",
-    "direccion": "Calle San Antón, 72, 18005 Granada, España",
+    "nombre": "Centro Cultural Manuel de Falla",
+    "direccion": "Paseo de los Mártires, s/n, 18009 Granada, España",
+    "lat": 37.1745,
+    "lng": -3.5920,
+    "sector": "Actividades Culturales"
+  },
+  {
+    "nombre": "Teatro Alhambra",
+    "direccion": "Calle Molinos, 56, 18009 Granada, España",
+    "lat": 37.1725,
+    "lng": -3.5925,
+    "sector": "Eventos"
+  },
+  {
+    "nombre": "Tienda de Ropa El Corte Inglés",
+    "direccion": "Acera del Darro, 12-14, 18005 Granada, España",
     "lat": 37.1700,
-    "lng": -3.5980,
-    "sector": "Aventuras y Senderismo"
+    "lng": -3.5950,
+    "sector": "Tienda de Ropa"
   },
   {
-    "nombre": "Guías Nevada",
-    "direccion": "Calle Maestro Cebrián, 1, 18003 Granada, España",
-    "lat": 37.1830,
-    "lng": -3.6000,
-    "sector": "Guías de Montaña"
+    "nombre": "Souvenirs La Alborea",
+    "direccion": "Cuesta de Gomérez, 42, 18009 Granada, España",
+    "lat": 37.1765,
+    "lng": -3.5900,
+    "sector": "Souvenirs"
   },
   {
-    "nombre": "Oro de Sierra Nevada Almazara Ecológica",
+    "nombre": "Transportes Tocina",
+    "direccion": "Calle Luis Crovetto, 1, 18220 Albolote, Granada, España",
+    "lat": 37.2302,
+    "lng": -3.6550,
+    "sector": "Transporte"
+  },
+  {
+    "nombre": "Logística Alhambra",
+    "direccion": "Polígono Industrial Juncaril, Calle Albuñol, 18220 Albolote, Granada, España",
+    "lat": 37.2300,
+    "lng": -3.6555,
+    "sector": "Logística"
+  },
+  {
+    "nombre": "EcoSierra Nevada",
     "direccion": "Paraje de la Almazara, s/n, 18413 Capileira, Granada, España",
     "lat": 36.9610,
     "lng": -3.3630,
-    "sector": "Agricultura Ecológica"
+    "sector": "Sostenibilidad"
   },
   {
-    "nombre": "Cervezas Far West",
-    "direccion": "Calle Sierra Nevada, 12, 04009 Almería, España",
-    "lat": 36.8400,
-    "lng": -2.4670,
-    "sector": "Fabricación de Cerveza Artesanal"
+    "nombre": "Agricultura Ecológica Alpujarra",
+    "direccion": "Calle Real, 14, 18412 Bubión, Granada, España",
+    "lat": 36.9516,
+    "lng": -3.3578,
+    "sector": "Agricultura Ecológica"
   }
 ]

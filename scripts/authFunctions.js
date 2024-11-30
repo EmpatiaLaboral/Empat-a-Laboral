@@ -75,22 +75,28 @@ function handleRegister(event) {
     // Registrar usuario en Firebase Authentication
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Guardar nombre de usuario en Firestore
             const user = userCredential.user;
+
+            // Enviar correo de verificación
+            user.sendEmailVerification()
+                .then(() => {
+                    alert('Registro exitoso. Se ha enviado un correo de verificación. Por favor, verifica tu correo antes de iniciar sesión.');
+                    closePopup();
+                })
+                .catch((error) => {
+                    console.error("Error al enviar el correo de verificación:", error);
+                    displayError('No se pudo enviar el correo de verificación. Inténtalo de nuevo.');
+                });
+
+            // Guardar nombre de usuario en Firestore
             return db.collection('users').doc(user.uid).set({ username: username });
-        })
-        .then(() => {
-            alert('Registro exitoso. Ahora puedes iniciar sesión.');
-            closePopup();
-            updateUserStatus(username, true);
-            updateUIAfterAuth(username, true);
-            location.reload();
         })
         .catch((error) => {
             console.error("Error en el registro:", error);
             displayError('Error en el registro. Intenta con otro correo electrónico.');
         });
 }
+
 
 
 function handleLogin(event) {
@@ -103,15 +109,19 @@ function handleLogin(event) {
         return;
     }
 
-    // Iniciar sesión con Firebase Authentication
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-            // Obtener el nombre de usuario desde Firestore
+
+            if (!user.emailVerified) {
+                displayError('Por favor, verifica tu correo electrónico antes de iniciar sesión.');
+                return firebase.auth().signOut(); // Cierra sesión automáticamente
+            }
+
             return db.collection('users').doc(user.uid).get();
         })
         .then((doc) => {
-            if (doc.exists) {
+            if (doc && doc.exists) {
                 const username = doc.data().username;
                 localStorage.setItem('usuarioActual', username);
                 alert('Inicio de sesión exitoso.');
@@ -128,6 +138,7 @@ function handleLogin(event) {
             displayError('Correo electrónico o contraseña incorrectos.');
         });
 }
+
 
 
 export function logout(isSwitchingUser = false) {
